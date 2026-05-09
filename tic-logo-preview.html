@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TeamIndiaCompliance Logo — Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #F8F9FA;
+    color: #0A2463;
+    padding: 60px 40px;
+  }
+  h1 { font-size: 32px; margin-bottom: 8px; }
+  h2 { font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase; color: #6B7280; margin: 32px 0 16px; font-weight: 600; }
+  .lead { color: #6B7280; font-size: 15px; margin-bottom: 32px; max-width: 760px; line-height: 1.6; }
+  .row { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; margin-bottom: 16px; }
+
+  .swatch {
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+    padding: 32px;
+    display: flex; align-items: center; gap: 16px;
+    box-shadow: 0 4px 12px rgba(10,36,99,.04);
+  }
+  .swatch.dark { background: #0A2463; color: white; border-color: #0A2463; }
+  .swatch.cream { background: #FEF7F0; }
+  .label {
+    font-size: 11px;
+    color: #6B7280;
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .swatch.dark .label { color: rgba(255,255,255,.6); }
+
+  .lockup {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .lockup .name {
+    font-size: 22px; font-weight: 800; color: inherit;
+    letter-spacing: -0.5px;
+  }
+  .lockup.large .name { font-size: 32px; }
+
+  /* Mark sizes — width fixed at 4:3 ratio so layout is stable even before image loads */
+  .mark { display: block; object-fit: contain; }
+  .mark.s32  { width: 38px;  height: 28px;  }
+  .mark.s52  { width: 64px;  height: 48px;  }
+  .mark.s80  { width: 96px;  height: 72px;  }
+  .mark.s140 { width: 160px; height: 120px; }
+
+  .palette { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+  .chip {
+    padding: 14px 18px; border-radius: 12px;
+    color: white; font-weight: 600; font-size: 13px;
+    min-width: 160px;
+  }
+
+  .notice {
+    background: #FEF7F0; border: 1px solid #F4C99F; border-radius: 12px;
+    padding: 16px 20px; margin-bottom: 32px; color: #7A3F0E;
+    font-size: 14px; line-height: 1.6; max-width: 760px;
+  }
+  .notice b { color: #5A2D08; }
+</style>
+</head>
+<body>
+
+<h1>TeamIndiaCompliance — Logo</h1>
+<p class="lead">The official three-figure tricolor mark — saffron, white, and green — woven into a single team symbol. Three interlinked figures signal trust, partnership, and pan-India compliance coverage.</p>
+
+<div class="notice">
+  <b>Note:</b> All logo images on this page reference <code>tic-logo.jpeg</code> in the same folder. If the image isn't showing, save your logo file as <code>tic-logo.jpeg</code> in the project folder.
+</div>
+
+<h2>Primary Lockup — On Light</h2>
+<div class="row">
+  <div class="swatch">
+    <div class="lockup large">
+      <img class="mark s140" src="tic-logo.jpeg" alt="TeamIndiaCompliance logo">
+      <div class="name">TeamIndiaCompliance</div>
+    </div>
+  </div>
+</div>
+
+<h2>On Cream &amp; Dark Backgrounds</h2>
+<div class="row">
+  <div class="swatch cream">
+    <div class="lockup">
+      <img class="mark s80" src="tic-logo.jpeg" alt="TeamIndiaCompliance logo">
+      <div class="name">TeamIndiaCompliance</div>
+    </div>
+  </div>
+  <div class="swatch dark">
+    <div class="lockup">
+      <img class="mark s80" src="tic-logo.jpeg" alt="TeamIndiaCompliance logo">
+      <div class="name">TeamIndiaCompliance</div>
+    </div>
+  </div>
+</div>
+
+<h2>Mark Only — Sizing</h2>
+<div class="row">
+  <div class="swatch" style="flex-direction: column; align-items: flex-start;">
+    <img class="mark s140" src="tic-logo.jpeg" alt="TeamIndiaCompliance logo">
+    <div class="label">120 px tall  ·  Hero</div>
+  </div>
+  <div class="swatch" style="flex-direction: column; align-items: flex-start;">
+    <img class="mark s80" src="tic-logo.jpeg" alt="TeamIndiaCompliance logo">
+    <div class="label">72 px tall  ·  Section header</div>
+  </div>
+  <div class="swatch" style="flex-direction: column; align-items: flex-start;">
+    <img class="mark s52" src="tic-logo.jpeg" alt="TeamIndiaCompliance logo">
+    <div class="label">48 px tall  ·  Nav bar</div>
+  </div>
+  <div class="swatch" style="flex-direction: column; align-items: flex-start;">
+    <img class="mark s32" src="tic-logo.jpeg" alt="TeamIndiaCompliance logo">
+    <div class="label">28 px tall  ·  Favicon</div>
+  </div>
+</div>
+
+<h2>Color Palette</h2>
+<div class="palette">
+  <div class="chip" style="background:#FF8C00">Saffron · #FF8C00</div>
+  <div class="chip" style="background:#FFFFFF; color:#0A2463; border: 1px solid #CFD3DA">White · #FFFFFF</div>
+  <div class="chip" style="background:#138808">Green · #138808</div>
+</div>
+
+</body>
+</html>

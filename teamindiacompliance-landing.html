@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamIndia Compliance — Labour Law & HR Compliance Partner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0A2463;
+      --navy-deep: #071840;
+      --saffron: #E87722;
+      --saffron-light: #FEF1E5;
+      --green: #13681E;
+      --green-light: #DFF4E2;
+      --white: #FFFFFF;
+      --bg-light: #F8F9FA;
+      --bg-cream: #FEF7F0;
+      --text: #1A1A1A;
+      --muted: #6B7280;
+      --border: #E5E7EB;
+      --shadow-sm: 0 4px 12px rgba(10, 36, 99, 0.06);
+      --shadow-md: 0 12px 32px rgba(10, 36, 99, 0.08);
+      --shadow-lg: 0 24px 60px rgba(10, 36, 99, 0.12);
+      --shadow-cta: 0 8px 20px rgba(232, 119, 34, 0.25);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.5;
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 100px 0;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--saffron);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--navy);
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+    }
+
+    h1 {
+      font-size: 56px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+    }
+
+    h2 {
+      font-size: 42px;
+      font-weight: 700;
+    }
+
+    h3 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    h4 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    p {
+      color: var(--muted);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 26px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: transform .15s ease, box-shadow .15s ease;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--saffron);
+      color: white;
+      box-shadow: var(--shadow-cta);
+    }
+
+    .btn-primary:hover {
+      background: #d66c1c;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--navy);
+      border: 1.5px solid var(--navy);
+    }
+
+    .btn-secondary:hover {
+      background: var(--navy);
+      color: white;
+    }
+
+    .btn-dark {
+      background: var(--navy);
+      color: white;
+    }
+
+    .btn-dark:hover {
+      background: var(--navy-deep);
+    }
+
+    /* === NAV === */
+    nav.top {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-mark {
+      position: relative;
+      width: 64px;
+      height: 48px;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    .logo-mark svg.fallback,
+    .logo-mark img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .logo-mark img {
+      z-index: 2;
+    }
+
+    /* image sits on top of fallback when it loads */
+    .logo-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+
+    .nav-phone {
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      transition: color .15s;
+    }
+
+    .nav-links a:hover {
+      color: var(--saffron);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-phone {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    /* === HERO === */
+    .hero {
+      background: linear-gradient(135deg, #F8F9FA 0%, #FEF7F0 100%);
+      padding: 80px 0 100px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 100px;
+      background: var(--saffron-light);
+      color: var(--saffron);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .tag-pill::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--saffron);
+    }
+
+    .hero h1 .accent {
+      color: var(--saffron);
+    }
+
+    .hero p.lead {
+      font-size: 18px;
+      line-height: 1.7;
+      margin: 24px 0 32px;
+      max-width: 580px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .trust-row {
+      display: flex;
+      gap: 24px;
+      margin-top: 28px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .hero-visual {
+      position: relative;
+      aspect-ratio: 1/1;
+      max-width: 540px;
+      margin-left: auto;
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 16%;
+      background: var(--saffron);
+    }
+
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 16%;
+      background: var(--green);
+    }
+
+    .hero-card {
+      position: absolute;
+      top: 18%;
+      left: 8%;
+      right: 8%;
+      bottom: 18%;
+      background: white;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .ashoka {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 3px solid var(--saffron);
+      position: relative;
+    }
+
+    .ashoka::before,
+    .ashoka::after {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border: 2px dashed rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+    }
+
+    .ashoka::after {
+      inset: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-style: solid;
+    }
+
+    .hero-card h3 {
+      font-size: 22px;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat-row:last-child {
+      border-bottom: none;
+    }
+
+    .stat-row .lbl {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .stat-row .val {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    /* === STATS BAR === */
+    .stats-bar {
+      background: var(--navy);
+      padding: 40px 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .stat-cell {
+      text-align: center;
+      padding: 16px;
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .stat-cell:last-child {
+      border-right: none;
+    }
+
+    .stat-cell .num {
+      font-size: 44px;
+      font-weight: 800;
+      color: var(--saffron);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-cell .lbl {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.5;
+    }
+
+    /* === ABOUT === */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+      height: 480px;
+    }
+
+    .about-card-1 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 78%;
+      height: 280px;
+      background: var(--bg-cream);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 28px;
+    }
+
+    .about-card-1 .year-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--saffron);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      line-height: 1.1;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(232,119,34,0.25);
+    }
+    .about-card-1 .year-circle .est-label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      opacity: 0.9;
+      margin-bottom: 4px;
+    }
+    .about-card-1 .year-circle .est-year {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .about-card-1 h4 {
+      font-size: 22px;
+    }
+
+    .about-card-1 p {
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .about-card-2 {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 60%;
+      height: 220px;
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .about-card-2 .tag {
+      color: var(--saffron);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+    }
+
+    .about-card-2 .body {
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .pillars-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .pillar {
+      padding: 18px;
+      border-radius: 12px;
+      background: var(--bg-light);
+    }
+
+    .pillar .icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .pillar h4 {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .pillar p {
+      font-size: 13px;
+    }
+
+    /* === SERVICES === */
+    .services {
+      background: var(--bg-light);
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 56px;
+    }
+
+    .section-head h2 {
+      margin-bottom: 16px;
+    }
+
+    .section-head p {
+      font-size: 17px;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 28px;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--saffron);
+    }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: var(--bg-cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+
+    .service-tag {
+      display: inline-flex;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: var(--green-light);
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 600;
+      align-self: flex-start;
+    }
+
+    .service-tag.popular {
+      background: var(--saffron-light);
+      color: var(--saffron);
+    }
+
+    .service-card h3 {
+      font-size: 19px;
+      line-height: 1.3;
+    }
+
+    .service-card p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .learn-more {
+      color: var(--saffron);
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: auto;
+    }
+
+    .view-all-wrap {
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    /* === INDUSTRIES === */
+    .industries {
+      padding: 80px 0;
+    }
+
+    .ind-head {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .ind-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 16px;
+    }
+
+    .ind-cell {
+      background: var(--bg-light);
+      border-radius: 12px;
+      padding: 24px 12px;
+      text-align: center;
+      transition: background .2s, transform .2s;
+    }
+
+    .ind-cell:hover {
+      background: var(--bg-cream);
+      transform: translateY(-2px);
+    }
+
+    .ind-cell .ico {
+      font-size: 28px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .ind-cell .nm {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    /* === WHY US === */
+    .why {
+      background: var(--navy);
+      color: white;
+      padding: 100px 0;
+    }
+
+    .why h2 {
+      color: white;
+    }
+
+    .why .eyebrow {
+      color: var(--saffron);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .why-left p {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 24px 0 28px;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .benefit {
+      padding: 24px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .benefit .ico {
+      font-size: 22px;
+    }
+
+    .benefit h4 {
+      color: white;
+      font-size: 16px;
+    }
+
+    .benefit p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* === PROCESS === */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .step {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+    }
+
+    .step .num-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--saffron);
+      color: white;
+      font-weight: 800;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step h3 {
+      font-size: 19px;
+    }
+
+    .step p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* === TESTIMONIALS === */
+    .testimonials {
+      background: var(--bg-light);
+    }
+
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .test-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 32px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .stars {
+      color: var(--saffron);
+      font-size: 18px;
+      letter-spacing: 2px;
+    }
+
+    .test-quote {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text);
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    .test-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      object-fit: cover;
+      display: block;
+    }
+
+    .test-author .name {
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 15px;
+    }
+
+    .test-author .role {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* === FAQ === */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 0.6fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .faq-left h2 {
+      font-size: 38px;
+    }
+
+    .faq-contact-card {
+      margin-top: 24px;
+      background: var(--bg-cream);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-contact-card h4 {
+      font-size: 16px;
+    }
+
+    .faq-contact-card p {
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .faq-contact-card .btn {
+      align-self: flex-start;
+      padding: 10px 16px;
+      font-size: 13px;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    details.faq-item {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      transition: background .2s, border-color .2s;
+    }
+
+    details.faq-item[open] {
+      background: var(--bg-cream);
+      border-color: var(--saffron);
+    }
+
+    details.faq-item summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      list-style: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    details.faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.faq-item summary::after {
+      content: "+";
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--saffron);
+      flex-shrink: 0;
+      transition: transform .2s;
+    }
+
+    details.faq-item[open] summary::after {
+      content: "−";
+    }
+
+    details.faq-item .ans {
+      margin-top: 14px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* === INQUIRY === */
+    .inquiry {
+      background: linear-gradient(135deg, var(--navy) 0%, #133272 100%);
+      color: white;
+    }
+
+    .inquiry-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.05fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .inq-left .eyebrow {
+      color: var(--saffron);
+    }
+
+    .inq-left h2 {
+      color: white;
+      font-size: 44px;
+    }
+
+    .inq-left>p {
+      color: rgba(255, 255, 255, 0.78);
+      margin: 24px 0;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .contact-row .lbl {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 2px;
+    }
+
+    .contact-row .val {
+      font-size: 14px;
+      color: white;
+      font-weight: 500;
+    }
+
+    .form-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+      color: var(--text);
+    }
+
+    .form-card h3 {
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    .form-card .sub {
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      padding: 14px 16px;
+      border-radius: 8px;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--text);
+      transition: border-color .15s, box-shadow .15s;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--saffron);
+      box-shadow: 0 0 0 3px rgba(232, 119, 34, 0.15);
+    }
+
+    .field textarea {
+      resize: vertical;
+      min-height: 110px;
+      line-height: 1.5;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 18px 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .checkbox-row input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--saffron);
+    }
+
+    .form-error {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      background: #FEE2E2;
+      border: 1px solid #FCA5A5;
+      color: #991B1B;
+      font-size: 13px;
+    }
+    .form-error a { color: #991B1B; text-decoration: underline; font-weight: 600; }
+
+    .form-success {
+      text-align: center;
+      padding: 56px 40px;
+    }
+    .form-success .success-icon {
+      width: 72px; height: 72px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: #DFF4E2;
+      color: var(--green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 40px; font-weight: 800;
+    }
+    .form-success h3 { margin-bottom: 12px; }
+    .form-success .sub { margin-bottom: 24px; }
+    .form-success .btn { display: inline-flex; }
+
+    .form-card .btn {
+      width: 100%;
+      justify-content: center;
+      padding: 16px;
+      font-size: 16px;
+    }
+
+    /* === FOOTER === */
+    footer {
+      background: var(--navy-deep);
+      color: white;
+      padding: 80px 0 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 56px;
+      align-items: start;
+    }
+
+    .footer-brand p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 13px;
+      line-height: 1.7;
+      margin: 16px 0 16px;
+    }
+
+    .footer-brand .logo-text {
+      color: white;
+      font-size: 22px;
+    }
+
+    .socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .social-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      transition: background .15s;
+    }
+
+    .social-btn:hover {
+      background: var(--saffron);
+    }
+
+    .footer-col h4 {
+      color: white;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-col a {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 13px;
+      transition: color .15s;
+    }
+
+    .footer-col a:hover {
+      color: var(--saffron);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 24px 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .copy {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 12px;
+    }
+
+    .badges {
+      display: flex;
+      gap: 12px;
+    }
+
+    .badge {
+      padding: 6px 12px;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    /* responsive */
+    @media (max-width: 980px) {
+      h1 {
+        font-size: 40px;
+      }
+
+      h2 {
+        font-size: 32px;
+      }
+
+      .nav-links,
+      .nav-phone {
+        display: none;
+      }
+
+      .hero-grid,
+      .about-grid,
+      .why-grid,
+      .faq-grid,
+      .inquiry-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat-cell {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .service-grid,
+      .test-grid,
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ind-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .pillars-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="top">
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-mark">
+          <!-- Fallback inline logo — visible only if tic-logo.jpeg is missing -->
+          <svg class="fallback" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <filter id="ticnav-soft" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.10" />
+              </filter>
+            </defs>
+            <path d="M 80 78 C 25 95, 15 200, 75 218 C 130 222, 155 180, 160 145" stroke="#FF8C00" stroke-width="34"
+              stroke-linecap="round" fill="none" />
+            <path d="M 240 78 C 295 95, 305 200, 245 218 C 190 222, 165 180, 160 145" stroke="#138808" stroke-width="34"
+              stroke-linecap="round" fill="none" />
+            <path d="M 160 78 C 125 100, 125 200, 160 222 C 195 200, 195 100, 160 78 Z" fill="#FFFFFF" stroke="#CFD3DA"
+              stroke-width="2.5" filter="url(#ticnav-soft)" />
+            <circle cx="80" cy="50" r="26" fill="#FF8C00" />
+            <circle cx="160" cy="50" r="26" fill="#FFFFFF" stroke="#CFD3DA" stroke-width="2.5"
+              filter="url(#ticnav-soft)" />
+            <circle cx="240" cy="50" r="26" fill="#138808" />
+          </svg>
+          <!-- Real logo image — replaces fallback the moment it loads. If missing, we hide the broken <img> so the fallback shows. -->
+          <img src="tic-logo.jpeg" alt="TeamIndia Compliance" onerror="this.style.display='none'">
+        </div>
+        <div class="logo-text">TeamIndia Compliance</div>
+      </div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#industries">Industries</a>
+        <a href="#faq">Resources</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-cta">
+        <span class="nav-phone">📞 +91 86838 52482</span>
+        <a href="#contact" class="btn btn-primary" style="padding: 12px 20px; font-size: 14px;">Get Free
+          Consultation</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div>
+        <span class="tag-pill">Trusted by 500+ Businesses Across India</span>
+        <h1>End-to-End Labour Law &<br>HR Compliance, <span class="accent">Simplified.</span></h1>
+        <p class="lead">From EPF & ESIC registrations to payroll, factory licenses, and government liaisoning —
+          TeamIndia Compliance handles every regulatory requirement so you can focus on growing your business.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">Request Free Consultation →</a>
+          <a href="#services" class="btn btn-secondary">Explore Our Services</a>
+        </div>
+        <div class="trust-row">
+          <span>✓ Pan-India Coverage</span>
+          <span>✓ 30+ Years Experience</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="ashoka"></div>
+          <h3>Compliance Dashboard</h3>
+          <div class="stat-row"><span class="lbl">EPF Filings</span><span class="val"
+              style="color:var(--green)">98%</span></div>
+          <div class="stat-row"><span class="lbl">ESIC Compliance</span><span class="val"
+              style="color:var(--saffron)">100%</span></div>
+          <div class="stat-row"><span class="lbl">Payroll Accuracy</span><span class="val"
+              style="color:var(--navy)">99.9%</span></div>
+          <div class="stat-row"><span class="lbl">Govt Notices Closed</span><span class="val"
+              style="color:var(--green)">142</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-cell">
+          <div class="num">500+</div>
+          <div class="lbl">Clients Served<br>Across India</div>
+        </div>
+        <div class="stat-cell">
+          <div class="num">30+</div>
+          <div class="lbl">Years of<br>Industry Experience</div>
+        </div>
+        <div class="stat-cell">
+          <div class="num">10K+</div>
+          <div class="lbl">Compliance Filings<br>Managed Annually</div>
+        </div>
+        <div class="stat-cell">
+          <div class="num">28</div>
+          <div class="lbl">States & UTs<br>Covered</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container about-grid">
+      <div class="about-visual">
+        <div class="about-card-1">
+          <div class="year-circle">
+            <span class="est-label">EST.</span>
+            <span class="est-year">1996</span>
+          </div>
+          <h4>30+ Years of Trust</h4>
+          <p>Trusted compliance partner since our founding</p>
+        </div>
+        <div class="about-card-2">
+          <span class="tag">OUR MISSION</span>
+          <p class="body">To make Indian labour law and HR compliance effortless for every business — big or small.</p>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow">About TeamIndia Compliance</span>
+        <h2>Your Trusted Partner in<br>Labour Law & HR Compliance</h2>
+        <p style="margin: 24px 0; font-size: 16px; line-height: 1.75;">TeamIndia Compliance is a specialist consultancy
+          serving organisations across manufacturing, IT, services, retail, and emerging sectors. Our team of qualified labour law
+          professionals — ensures your business
+          stays fully compliant with India's evolving statutory framework.</p>
+        <p style="font-size: 16px; line-height: 1.75;">Whether you're a startup setting up your first office, a factory
+          navigating multi-state operations, or a foreign entity entering India, we tailor our compliance services to
+          your scale and industry.</p>
+        <div class="pillars-row">
+          <div class="pillar">
+            <span class="icon">🛡</span>
+            <h4>Compliant</h4>
+            <p>100% statutory adherence</p>
+          </div>
+          <div class="pillar">
+            <span class="icon">⚡</span>
+            <h4>Responsive</h4>
+            <p>Same-day query resolution</p>
+          </div>
+          <div class="pillar">
+            <span class="icon">🤝</span>
+            <h4>Transparent</h4>
+            <p>No hidden charges, ever</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section services" id="services">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Our Services</span>
+        <h2>One-Stop Compliance Companion</h2>
+        <p>From statutory registrations to monthly filings and licensing, we cover the full spectrum of labour law and
+          HR compliance for businesses of every size.</p>
+      </div>
+      <div class="service-grid">
+        <article class="service-card">
+          <div class="service-icon">📋</div>
+          <span class="service-tag popular">Most Requested</span>
+          <h3>EPF Registration & Compliance</h3>
+          <p>End-to-end EPF setup, monthly contributions, ECR uploads, claim settlements, and PF withdrawal support.</p>
+          <a class="learn-more">Learn more →</a>
+        </article>
+        <article class="service-card">
+          <div class="service-icon">🏥</div>
+          <h3>ESIC Registration & Filings</h3>
+          <p>Employee State Insurance registration, contribution management, accident reporting, and benefit claim
+            assistance.</p>
+          <a class="learn-more">Learn more →</a>
+        </article>
+        <article class="service-card">
+          <div class="service-icon">💰</div>
+          <span class="service-tag popular">Popular</span>
+          <h3>Payroll Processing</h3>
+          <p>Accurate monthly payroll, salary structuring, Form 16 generation, TDS, professional tax, and statutory
+            deductions.</p>
+          <a class="learn-more">Learn more →</a>
+        </article>
+        <article class="service-card">
+          <div class="service-icon">🏭</div>
+          <h3>Factory License</h3>
+          <p>Factory Act registration, plan approvals, building stability certificates, renewals across all states.</p>
+          <a class="learn-more">Learn more →</a>
+        </article>
+        <article class="service-card">
+          <div class="service-icon">👷</div>
+          <h3>Labour License (CLRA)</h3>
+          <p>Contract Labour (Regulation & Abolition) Act licenses for principal employers and contractors.</p>
+          <a class="learn-more">Learn more →</a>
+        </article>
+        <article class="service-card">
+          <div class="service-icon">📊</div>
+          <h3>HR Consultancy</h3>
+          <p>Policy drafting, employee handbooks, POSH compliance, exit management, and HR audit services.</p>
+          <a class="learn-more">Learn more →</a>
+        </article>
+        <article class="service-card">
+          <div class="service-icon">🏛</div>
+          <h3>Government Liaisoning</h3>
+          <p>Representation before labour departments, EPFO, ESIC, factory inspectorates, and PF tribunals.</p>
+          <a class="learn-more">Learn more →</a>
+        </article>
+        <article class="service-card">
+          <div class="service-icon">⚖️</div>
+          <h3>Statutory Audits</h3>
+          <p>Comprehensive compliance audits, gap analysis, risk assessment, and remediation roadmaps.</p>
+          <a class="learn-more">Learn more →</a>
+        </article>
+        <article class="service-card">
+          <div class="service-icon">🌍</div>
+          <h3>Multi-State Setup</h3>
+          <p>Shops & Establishments registration, professional tax, labour welfare fund — across 28 states & UTs.</p>
+          <a class="learn-more">Learn more →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section class="industries" id="industries">
+    <div class="container">
+      <div class="ind-head">TRUSTED ACROSS INDUSTRIES</div>
+      <div class="ind-grid">
+        <div class="ind-cell"><span class="ico">🏭</span>
+          <div class="nm">Manufacturing</div>
+        </div>
+        <div class="ind-cell"><span class="ico">💻</span>
+          <div class="nm">IT & Software</div>
+        </div>
+        <div class="ind-cell"><span class="ico">🏥</span>
+          <div class="nm">Healthcare</div>
+        </div>
+        <div class="ind-cell"><span class="ico">🛍</span>
+          <div class="nm">Retail & FMCG</div>
+        </div>
+        <div class="ind-cell"><span class="ico">🚚</span>
+          <div class="nm">Logistics</div>
+        </div>
+        <div class="ind-cell"><span class="ico">🏗</span>
+          <div class="nm">Construction</div>
+        </div>
+        <div class="ind-cell"><span class="ico">🏨</span>
+          <div class="nm">Hospitality</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="why">
+    <div class="container why-grid">
+      <div class="why-left">
+        <span class="eyebrow">Why Choose Us</span>
+        <h2>Compliance That<br>Doesn't Disrupt<br>Your Business</h2>
+        <p>We don't just file forms — we proactively monitor regulatory changes, flag risks early, and represent you
+          when it matters. Here's what makes us different.</p>
+        <a href="#contact" class="btn btn-primary">Talk to a Specialist →</a>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit">
+          <div class="ico">🎯</div>
+          <h4>Domain Specialists</h4>
+          <p>Labour law CAs, ex-PF Commissioners, and HR consultants on every account.</p>
+        </div>
+        <div class="benefit">
+          <div class="ico">📱</div>
+          <h4>Dedicated Compliance Manager</h4>
+          <p>Single point of contact for all your filings, queries, and notices.</p>
+        </div>
+        <div class="benefit">
+          <div class="ico">🚨</div>
+          <h4>Proactive Alert System</h4>
+          <p>Get notified of upcoming due dates, regulatory changes, and risk areas.</p>
+        </div>
+        <div class="benefit">
+          <div class="ico">📍</div>
+          <h4>Pan-India Coverage</h4>
+          <p>On-ground support across 28 states — no third-party handoffs.</p>
+        </div>
+        <div class="benefit">
+          <div class="ico">💸</div>
+          <h4>Transparent Pricing</h4>
+          <p>Fixed-fee retainers and itemised quotes. No surprises on your invoice.</p>
+        </div>
+        <div class="benefit">
+          <div class="ico">🔒</div>
+          <h4>Data Security & Confidentiality</h4>
+          <p>Encrypted document handling and signed NDAs on every engagement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section testimonials">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What Our Clients Say</span>
+        <h2>Real Stories from Real Businesses</h2>
+      </div>
+      <div class="test-grid">
+        <article class="test-card">
+          <div class="stars">★★★★★</div>
+          <p class="test-quote">"TeamIndia Compliance set up our EPF, ESIC, and Shops & Establishments registrations
+            across 6 states in under 3 weeks. What seemed like months of paperwork became a single weekly call."</p>
+          <div class="test-author">
+            <img class="avatar" src="https://as1.ftcdn.net/jpg/03/02/21/64/220_F_302216446_jgkK5y0K9VwiVrS5nucr00y2Cux0fOmE.jpg" alt="Priya Menon">
+            <div>
+              <div class="name">Priya Menon</div>
+              <div class="role">Head of People, TechFleet Logistics</div>
+            </div>
+          </div>
+        </article>
+        <article class="test-card">
+          <div class="stars">★★★★★</div>
+          <p class="test-quote">"When we faced a labour department inspection at our Pune unit, their team handled
+            everything end-to-end. The notice was closed without penalty. Worth every rupee of the retainer."</p>
+          <div class="test-author">
+            <img class="avatar" src="https://media.licdn.com/dms/image/v2/D5603AQFWtuYvgfHUTQ/profile-displayphoto-crop_800_800/B56ZvuPOFAHQAI-/0/1769228527187?e=1779926400&v=beta&t=2PkFc6YzfDrNJslu29C26AaEqsTFSj41eI6Fy1fFHtE" alt="Rohan Desai">
+            <div>
+              <div class="name">Rohan Desai</div>
+              <div class="role">Director, Kalpana Industries Pvt Ltd</div>
+            </div>
+          </div>
+        </article>
+        <article class="test-card">
+          <div class="stars">★★★★★</div>
+          <p class="test-quote">"As a US-based parent company, we needed someone who understood Indian compliance and
+            could communicate clearly. They've been our backbone for 2 years now."</p>
+          <div class="test-author">
+            <img class="avatar" src="https://media.licdn.com/dms/image/v2/D5603AQExW2m-fKYLMw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1705858410827?e=1779926400&v=beta&t=9kLDqUZRIzQvF7_h_TqBvnFY5pQEJh4XYjKrBPUxYsM" alt="Gaurav Dalal">
+            <div>
+              <div class="name">Gaurav Dalal</div>
+              <div class="role">VP Operations, Sequifi India</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container faq-grid">
+      <div class="faq-left">
+        <span class="eyebrow">Frequently Asked</span>
+        <h2>Got Questions?<br>We Have Answers.</h2>
+        <p style="margin-top: 16px; font-size: 16px; line-height: 1.7;">Common questions about our compliance services,
+          pricing, and engagement model.</p>
+        <div class="faq-contact-card">
+          <h4>Still have questions?</h4>
+          <p>Our compliance experts are happy to walk you through anything specific to your business.</p>
+          <a href="#contact" class="btn btn-primary">Schedule a Call →</a>
+        </div>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>Which businesses do you typically work with?</summary>
+          <div class="ans">We work with businesses of every scale — from 10-employee startups to 5000+ employee
+            manufacturing units. Our clients span IT, manufacturing, healthcare, retail, logistics, hospitality, and
+            more across all 28 states and 8 UTs.</div>
+        </details>
+        <details class="faq-item">
+          <summary>What does a typical compliance retainer cost?</summary>
+          <div class="ans">Retainers start at ₹5,000/month for small businesses (under 50 employees) and scale based on
+            headcount, number of locations, and scope of services. We provide a transparent itemised quote after our
+            discovery call.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How fast can you complete EPF/ESIC registration?</summary>
+          <div class="ans">Standard EPF and ESIC registrations are completed on the same day with our pre-verified document checklist.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Do you handle inspections and notices from labour authorities?</summary>
+          <div class="ans">Yes. Our government liaisoning team — which includes ex-PF Commissioners and ex-Labour
+            Officers — represents you before EPFO, ESIC, factory inspectorates, and labour tribunals at no extra charge
+            for retainer clients.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Can you integrate with our existing payroll/HRMS?</summary>
+          <div class="ans">Absolutely. We integrate with all major HRMS platforms including Zoho People, Keka,
+            Darwinbox, GreytHR, SAP SuccessFactors, and Workday. We also support custom CSV exports.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How do you keep us informed about regulatory changes?</summary>
+          <div class="ans">Every retainer client receives a monthly compliance newsletter, real-time alerts on critical
+            changes, and a quarterly review call with their dedicated compliance manager.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- INQUIRY -->
+  <section class="section inquiry" id="contact">
+    <div class="container inquiry-grid">
+      <div class="inq-left">
+        <span class="eyebrow">Get In Touch</span>
+        <h2>Ready to Simplify<br>Your Compliance?</h2>
+        <p>Tell us a bit about your business and we'll get back within 4 working hours with a tailored proposal. Your
+          first 30-min consultation is on us — no obligations.</p>
+        <div class="contact-list">
+          <div class="contact-row">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="lbl">PHONE</div>
+              <div class="val">+91 86838 52482</div>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="lbl">EMAIL</div>
+              <div class="val">support@teamindiacompliance.com</div>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="lbl">HEAD OFFICE</div>
+              <div class="val">DLF Galleria Market, Gurgaon</div>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">🕒</div>
+            <div>
+              <div class="lbl">HOURS</div>
+              <div class="val">Mon – Sat, 9:30 AM – 7:00 PM IST</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form id="inquiry-form" class="form-card" action="https://api.web3forms.com/submit" method="POST">
+        <!-- Web3Forms config — replace YOUR_ACCESS_KEY_HERE with the access key emailed to you by web3forms.com -->
+        <input type="hidden" name="access_key" value="6a21b648-57e9-4ea3-840d-1ac461467d14">
+        <input type="hidden" name="from_name" value="TeamIndia Compliance Website">
+        <input type="hidden" name="subject" value="New inquiry from TeamIndia Compliance website">
+        <!-- Honeypot anti-spam field (must remain empty) -->
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+        <h3>Request Free Consultation</h3>
+        <p class="sub">Fill in your details and we'll respond within 4 working hours.</p>
+        <div class="form-row">
+          <div class="field"><label>Full Name *</label><input type="text" name="name" placeholder="Rajesh Kumar" required></div>
+          <div class="field"><label>Work Email *</label><input type="email" name="email" placeholder="rajesh@yourcompany.com" required></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Phone *</label><input type="tel" name="phone" placeholder="+91 86838 52482" required></div>
+          <div class="field"><label>Company Name *</label><input type="text" name="company" placeholder="Your Company Pvt Ltd" required></div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>Company Size</label>
+            <select name="company_size">
+              <option value="">Select headcount range</option>
+              <option>1 – 25 employees</option>
+              <option>26 – 100 employees</option>
+              <option>101 – 500 employees</option>
+              <option>501 – 1000 employees</option>
+              <option>1000+ employees</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Primary Service Needed</label>
+            <select name="service">
+              <option value="">Choose a service</option>
+              <option>EPF Compliance</option>
+              <option>ESIC Compliance</option>
+              <option>Payroll Processing</option>
+              <option>Factory License</option>
+              <option>Labour License (CLRA)</option>
+              <option>HR Consultancy</option>
+              <option>Government Liaisoning</option>
+              <option>Statutory Audit</option>
+              <option>Multi-State Setup</option>
+              <option>Other / Need to Discuss</option>
+            </select>
+          </div>
+        </div>
+        <div class="field full" style="margin-bottom: 8px;">
+          <label>Tell us about your requirement</label>
+          <textarea name="message" placeholder="e.g., We're a 120-employee manufacturing unit in Pune, looking to outsource our payroll and PF compliance..."></textarea>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" id="consent" required>
+          <label for="consent">I agree to TeamIndia Compliance's privacy policy and consent to being contacted.</label>
+        </div>
+        <button type="submit" class="btn btn-primary" id="inquiry-submit">Submit Inquiry →</button>
+        <p id="inquiry-error" class="form-error" hidden>Something went wrong. Please email us directly at <a href="mailto:support@teamindiacompliance.com">support@teamindiacompliance.com</a>.</p>
+      </form>
+
+      <!-- Success state — replaces the form on successful submit -->
+      <div id="inquiry-success" class="form-card form-success" hidden>
+        <div class="success-icon">✓</div>
+        <h3>Thank you — your inquiry is in.</h3>
+        <p class="sub">We've received your details and our team will respond within 4 working hours to <strong>support@teamindiacompliance.com</strong>. For anything urgent, call <strong>+91 86838 52482</strong>.</p>
+        <button type="button" class="btn btn-secondary" onclick="document.getElementById('inquiry-form').reset(); document.getElementById('inquiry-form').hidden=false; document.getElementById('inquiry-success').hidden=true;">Submit another inquiry</button>
+      </div>
+
+      <script>
+        (function () {
+          var form = document.getElementById('inquiry-form');
+          var success = document.getElementById('inquiry-success');
+          var errorEl = document.getElementById('inquiry-error');
+          var submitBtn = document.getElementById('inquiry-submit');
+          if (!form) return;
+
+          form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            errorEl.hidden = true;
+            var originalLabel = submitBtn.textContent;
+            submitBtn.textContent = 'Sending…';
+            submitBtn.disabled = true;
+
+            try {
+              var response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+              });
+              var json = await response.json().catch(function () { return {}; });
+
+              if (response.ok && json.success) {
+                form.hidden = true;
+                success.hidden = false;
+                success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              } else {
+                throw new Error(json.message || 'Submission failed');
+              }
+            } catch (err) {
+              errorEl.hidden = false;
+              submitBtn.textContent = originalLabel;
+              submitBtn.disabled = false;
+            }
+          });
+        })();
+      </script>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">TeamIndia Compliance</div>
+          <div class="socials">
+            <a class="social-btn" href="https://www.linkedin.com/company/team-india-compliance/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+              </svg>
+            </a>
+            <a class="social-btn" href="https://www.instagram.com/teamindia_compliance" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                <path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07c-1.28.06-2.15.26-2.91.55a5.87 5.87 0 0 0-2.13 1.39A5.87 5.87 0 0 0 .62 4.14C.33 4.9.13 5.77.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.55 2.91.3.79.7 1.46 1.39 2.13a5.87 5.87 0 0 0 2.13 1.39c.76.29 1.63.49 2.91.55C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.55a5.87 5.87 0 0 0 2.13-1.39 5.87 5.87 0 0 0 1.39-2.13c.29-.76.49-1.63.55-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.55-2.91a5.87 5.87 0 0 0-1.39-2.13A5.87 5.87 0 0 0 19.86.62C19.1.33 18.23.13 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a>EPF Compliance</a></li>
+            <li><a>ESIC Compliance</a></li>
+            <li><a>Payroll Processing</a></li>
+            <li><a>Factory License</a></li>
+            <li><a>Labour License</a></li>
+            <li><a>HR Consultancy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a>About Us</a></li>
+            <li><a>Our Team</a></li>
+            <li><a>Careers</a></li>
+            <li><a>Case Studies</a></li>
+            <li><a>Press & Media</a></li>
+            <li><a>Partners</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a>Compliance Calendar</a></li>
+            <li><a>Blog</a></li>
+            <li><a>Newsletter</a></li>
+            <li><a>Downloads</a></li>
+            <li><a>FAQs</a></li>
+            <li><a>Help Centre</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a>Privacy Policy</a></li>
+            <li><a>Terms of Service</a></li>
+            <li><a>Refund Policy</a></li>
+            <li><a>Cookies Policy</a></li>
+            <li><a>Disclaimer</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="copy">© 2026 TeamIndia Compliance. All rights reserved. | ISO 9001:2015 Certified</div>
+        <div class="badges">
+          <span class="badge">🇮🇳 Made in India</span>
+          <span class="badge">🔒 SSL Secured</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
