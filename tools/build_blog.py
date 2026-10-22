@@ -188,10 +188,10 @@ index_main = f"""  <section class="section">
 blog_ld = {"@context": "https://schema.org", "@type": "Blog", "name": "TeamIndia Compliance Blog", "url": BASE + "/blog/",
            "publisher": ORG, "inLanguage": "en-IN",
            "blogPost": [{"@type": "BlogPosting", "headline": p["h1"], "url": f"{BASE}/blog/{p['slug']}/", "datePublished": p["date"]} for p in POSTS]}
-write("blog/index.html", shell("Compliance Blog: EPF, Payroll & Labour Law Insights | TeamIndia Compliance",
-      "Practical articles on EPF, payroll, wages and India's Labour Codes for employers, from the TeamIndia Compliance team.",
-      "/blog/", [blog_ld], "Compliance Insights for Employers",
-      "Practical, sourced articles on EPF, payroll, wages and India's Labour Codes.", [("Home", "/"), ("Blog", "/blog/")], index_main))
+write("blog/index.html", shell("Compliance Blog: EPF, Payroll & Labour Law Updates | TeamIndia Compliance",
+      "Practical blog posts on EPF, payroll, wages and India's Labour Codes for employers, from the TeamIndia Compliance team.",
+      "/blog/", [blog_ld], "Compliance Blog for Employers",
+      "Practical, sourced posts on EPF, payroll, wages and India's Labour Codes.", [("Home", "/"), ("Blog", "/blog/")], index_main))
 
 # ---------- CSS ----------
 css = read("style.css")
@@ -244,17 +244,17 @@ s = read("index.html")
 s = re.sub(r"<!-- INSIGHTS -->.*?<!-- /INSIGHTS -->\s*", "", s, flags=re.S)
 home_cards = "\n        ".join(card_html(p) for p in POSTS[:3])
 ins = f"""<!-- INSIGHTS -->
-  <section class="section services" id="insights">
+  <section class="section services" id="blog">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Insights</span>
-        <h2>Compliance Insights for Employers</h2>
-        <p>Practical, sourced guidance on EPF, payroll, wages and India's Labour Codes.</p>
+        <span class="eyebrow">Our Blog</span>
+        <h2>Compliance Blog for Employers</h2>
+        <p>Practical, sourced posts on EPF, payroll, wages and India's Labour Codes.</p>
       </div>
       <div class="blog-grid">
         {home_cards}
       </div>
-      <p style="text-align:center;margin-top:32px"><a href="/blog/" class="btn btn-secondary">View all articles →</a></p>
+      <p style="text-align:center;margin-top:32px"><a href="/blog/" class="btn btn-secondary">View all blog posts →</a></p>
     </div>
   </section>
   <!-- /INSIGHTS -->

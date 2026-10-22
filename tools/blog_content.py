@@ -111,7 +111,7 @@ Worked example from the same commentary, for a monthly remuneration of ₹1,00,0
 | Excess added back to wages | 15,000 |
 | Wages for Code purposes | 50,000 |
 
-The label "allowance" does not protect the ₹15,000 excess. Note too that a package with basic pay at 60%, 50% or even 40% of the total can comply, as long as excluded items stay at or below 50%.
+The label "allowance" does not protect the ₹15,000 excess.
 
 ### Why it reaches PF, gratuity and more
 
