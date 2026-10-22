@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Gauge showing the 50 percent wage definition cap under the Code on Wages">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0A2463"/><stop offset="1" stop-color="#071840"/></linearGradient>
+<pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".05"/></pattern></defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#grid)"/>
+<circle cx="1080" cy="80" r="260" fill="#E87722" opacity=".08"/><circle cx="80" cy="600" r="220" fill="#2E9E3F" opacity=".10"/>
+<circle cx="600" cy="315" r="200" fill="none" stroke="#FFFFFF" stroke-opacity=".15" stroke-width="56"/><path d="M600.0 115.0 A200 200 0 0 1 600.0 515.0" fill="none" stroke="#E87722" stroke-width="56"/><path d="M600.0 515.0 A200 200 0 0 1 600.0 115.0" fill="none" stroke="#2E9E3F" stroke-width="56"/><text x="600" y="349" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="110" font-weight="800" fill="#FFFFFF">50%</text><line x1="600" y1="75" x2="600" y2="135" stroke="#FFFFFF" stroke-width="6"/><line x1="600" y1="495" x2="600" y2="555" stroke="#FFFFFF" stroke-width="6"/>
+<rect y="614" width="400" height="16" fill="#E87722"/><rect x="400" y="614" width="400" height="16" fill="#FFFFFF"/><rect x="800" y="614" width="400" height="16" fill="#2E9E3F"/>
+</svg>

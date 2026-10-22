@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /tic-logo-preview.html
+Disallow: /tools/
 
 Sitemap: https://teamindiacompliance.com/sitemap.xml
