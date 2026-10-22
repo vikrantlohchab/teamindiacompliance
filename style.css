@@ -1365,3 +1365,8 @@ a.service-card { display: block; color: inherit; }
 .tbl tr:last-child td { border-bottom: none; }
 .related-reading { margin-top: 8px; }
 @media (max-width: 980px) { .blog-grid { grid-template-columns: 1fr; } }
+
+/* whole service card clickable via its Learn more link */
+.service-card { position: relative; }
+.service-card a.learn-more[href]::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.service-card:has(a.learn-more[href]) { cursor: pointer; }
