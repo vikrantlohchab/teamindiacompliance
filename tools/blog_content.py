@@ -47,18 +47,18 @@ That is relief from roving inquiries, not from the rule. A credible case of arbi
 
 ### The salary-splitting trap: an illustration
 
-*This example is hypothetical and simplified, to show the mechanics. It assumes the statutory PF wage ceiling of ₹15,000 a month and contributions at 12% each from employer and employee. Check the current ceiling before using these numbers.*
+*This example is hypothetical and simplified, to show the mechanics. It assumes the statutory PF wage ceiling of ₹25,000 a month (raised from ₹15,000 on 17 September 2026; see our [wage ceiling post](/blog/epf-wage-ceiling-raised-to-25000-what-employers-must-do/)) and contributions at 12% each from employer and employee. Check the current ceiling before using these numbers.*
 
 A company pays an employee ₹40,000 a month. It fixes basic pay at ₹10,000 and calls the other ₹30,000 "special allowance", paid to every employee every month.
 
 | | Allowance treated as outside wages | Allowance treated as wages |
 | --- | --- | --- |
-| PF wage considered | ₹10,000 | ₹15,000 (ceiling) |
-| Employer PF at 12% | ₹1,200 | ₹1,800 |
-| Employee PF at 12% | ₹1,200 | ₹1,800 |
-| Combined monthly gap | | ₹1,200 |
+| PF wage considered | ₹10,000 | ₹25,000 (ceiling) |
+| Employer PF at 12% | ₹1,200 | ₹3,000 |
+| Employee PF at 12% | ₹1,200 | ₹3,000 |
+| Combined monthly gap | | ₹3,600 |
 
-That is ₹14,400 a year for one employee. For a 100-person team it is ₹14.4 lakh a year before interest and any damages, and it compounds across the years an authority can look back over. Where employees earn less than the ceiling, the whole allowance can matter, not just part of it.
+That is ₹43,200 a year for one employee. For a 100-person team it is ₹43.2 lakh a year before interest and any damages, and it compounds across the years an authority can look back over. Where employees earn less than the ceiling, the whole allowance can matter, not just part of it.
 
 ### Why the name on the payslip does not decide it
 
@@ -115,7 +115,7 @@ The label "allowance" does not protect the ₹15,000 excess.
 
 ### Why it reaches PF, gratuity and more
 
-The Code on Social Security uses this wage definition for provident fund, so a larger wage base can raise PF contributions, and revised wages also feed gratuity. The Ministry of Labour's FAQ of 16 March 2026 applies the revised-wage gratuity calculation from the implementation date, with no grace period ([People Matters](https://www.peoplematters.in/article/compensation-benefits/debunking-four-common-myths-about-the-code-on-wages-2019-what-hr-leaders-need-to-know-52188)). Whether the ₹15,000 PF wage ceiling changes the result for your headcount needs a separate check.
+The Code on Social Security uses this wage definition for provident fund, so a larger wage base can raise PF contributions, and revised wages also feed gratuity. The Ministry of Labour's FAQ of 16 March 2026 applies the revised-wage gratuity calculation from the implementation date, with no grace period ([People Matters](https://www.peoplematters.in/article/compensation-benefits/debunking-four-common-myths-about-the-code-on-wages-2019-what-hr-leaders-need-to-know-52188)). Separately, the PF wage ceiling itself rose from ₹15,000 to ₹25,000 on 17 September 2026, which widens the PF base for anyone earning up to the new ceiling (see [our wage ceiling post](/blog/epf-wage-ceiling-raised-to-25000-what-employers-must-do/)).
 
 ### What about variable pay?
 
@@ -213,4 +213,81 @@ Sources for the right-hand column: [S.S. Rana](https://ssrana.in/articles/unders
 TeamIndia Compliance runs payroll and PF structure reviews for employers across Delhi NCR and India. [Book a free consultation](/#contact).
 
 *General information, not legal advice.*"""),
+
+ dict(slug="epf-wage-ceiling-raised-to-25000-what-employers-must-do", image="epf-wage-ceiling-25000", cat="EPF compliance", mins=7, date="2026-10-23",
+  title="EPF Wage Ceiling Now ₹25,000: Employer Impact Guide",
+  h1="EPF Wage Ceiling Raised to ₹25,000: What Employers Must Do",
+  desc="The PF wage ceiling rose from ₹15,000 to ₹25,000 on 17 September 2026. A summary of the EY alert, with cost examples and an employer action list.",
+  alt="Two bars comparing the old 15,000 rupee and new 25,000 rupee EPF wage ceiling",
+  related=["epf-registration", "payroll-processing", "multi-state-setup"],
+  body="""The monthly wage ceiling for Provident Fund went from ₹15,000 to ₹25,000 on 17 September 2026. More employees must now be covered by EPF, pension and insurance, and employers pay more on every employee earning above the old limit. This post summarises the [EY PAS Alert dated 17 September 2026](https://www.ey.com/content/dam/ey-unified-site/ey-com/en-in/technical/alerts-hub/documents/2026/09/employees-provident-fund-wage-ceiling-increased.pdf) and adds worked examples.
+
+### What changed
+
+On 17 September 2026 the Ministry of Labour and Employment issued Notification S.O. 5109(E), prescribing ₹25,000 per month as the wage ceiling for Chapter III of the Code on Social Security, 2020. Chapter III covers provident fund, pension and deposit-linked insurance. The notification took effect immediately on publication and replaced the earlier ceiling of ₹15,000, which an earlier notification (S.O. 2702(E) of 29 May 2026) had set. EY notes it follows Union Cabinet approval announced by the Press Information Bureau on 16 September 2026.
+
+References to the wage ceiling in the Employees' Provident Funds Scheme, 2026, the Employees' Pension Scheme, 2026 and the Employees' Deposit-Linked Insurance Scheme, 2026 are to be read with the new figure. The reported aim is to align social security with current wage levels and widen coverage. Two other firms report the same change: [BDO](https://www.bdo.in/en-gb/insights/alerts-updates/alert-new-epf-ceiling-hiked) and [SCC Online](https://www.scconline.com/blog/post/2026/09/19/labour-ministry-notifies-25000-wage-ceiling-under-social-security-code/).
+
+### The numbers: before and now
+
+| Item (per employee, per month) | Ceiling of ₹15,000 | Ceiling of ₹25,000 |
+| --- | --- | --- |
+| Maximum employer PF contribution (12%) | ₹1,800 | ₹3,000 |
+| Maximum employee PF contribution (12%) | ₹1,800 | ₹3,000 |
+| Employer share to pension (8.33%) | ₹1,249.50 | ₹2,082.50 |
+| Balance of employer share to PF account | ₹550.50 | ₹917.50 |
+| Maximum EDLI contribution (0.5%, employer) | ₹75 | ₹125 |
+| Maximum EDLI benefit | ₹7 lakh | ₹7 lakh (unchanged) |
+
+The ₹25,000 column is from the EY alert. The ₹15,000 pension split and PF balance are our arithmetic from the same rates. The overall employer rate stays 12%. What moves is the split: more of the employer share goes to pension and less to the PF account.
+
+### Who is affected
+
+- **Employees earning ₹15,000 to ₹25,000.** EY says employees with wages up to ₹25,000 must now become members of the PF, and pension and EDLI cover follows. Under the old ceiling, someone who earned above ₹15,000 when first eligible could have been an excluded employee. BDO adds that coverage can depend on membership history and exclusion rules, so check each case.
+- **Employees above ₹25,000** stay outside mandatory pension coverage, subject to their earlier membership status. Where an employer and employee already contribute on actual wages above ₹25,000, the total PF contribution may not change.
+- **Contract workers.** The same ceiling applies to eligible workers engaged through contractors, so a principal employer's contractor costs can rise.
+
+### What it costs: a worked illustration
+
+*Hypothetical, simplified, and assuming contributions were previously limited to the old ceiling. Contribution is 12% each from employer and employee on wages up to ₹25,000.*
+
+| Monthly wages | PF each, before | PF each, now | Extra PF, employer and employee combined |
+| --- | --- | --- | --- |
+| ₹15,000 | ₹1,800 | ₹1,800 | None |
+| ₹20,000 | ₹1,800 | ₹2,400 | ₹1,200 |
+| ₹25,000 or more | ₹1,800 | ₹3,000 | ₹2,400 |
+
+For an employee at or above ₹25,000, the employer's own extra cost per month is about ₹1,200 in PF, ₹50 more in EDLI (₹75 to ₹125) and ₹50 more in administrative charges, assuming the 0.50% rate EY cites on the wider wage base. That is roughly ₹1,300 a month, or ₹15,600 a year per employee, and about ₹15.6 lakh a year for 100 such employees.
+
+### Seven areas the change touches
+
+1. Mandatory PF coverage.
+2. The wage base for contributions.
+3. Mandatory pension coverage.
+4. The pension share of the employer contribution (8.33%).
+5. The monthly pension benefit, since the cap on pensionable wages rises with the ceiling.
+6. EDLI contributions, an employer-only cost that cannot be recovered from the employee.
+7. Administrative charges and, for exempted establishments, inspection charges (EY cites 0.18%).
+
+### Take-home pay and contracts
+
+Paragraph 21 of the EPF Scheme does not let an employer deduct its own contribution from a member's wages. The employee's own share, though, rises with the ceiling, so take-home pay can fall unless pay is adjusted. Check the terms of employment and the way your CTC is built before changing any payslip, and plan how to explain it to staff.
+
+### Action list for employers
+
+1. List the employees who now fall within mandatory PF, pension and EDLI cover.
+2. Cost the extra employer contributions and administrative charges, and model take-home impact.
+3. Review payroll, HR, onboarding and ECR set-up for the new ceiling and the revised PF and pension split.
+4. Decide how to treat the wage period that includes 17 September 2026, and watch for further EPFO or Ministry directions before back-adjusting (BDO's suggestion).
+5. Review Voluntary PF elections and onboarding declarations.
+6. Review contractor agreements, commercials and your monitoring as principal employer.
+7. Tell affected employees early and keep your eligibility assessments and calculations on file.
+
+### How this links to wage definitions
+
+The ceiling applies to "wages" as defined under the Code on Social Security, so how you classify pay components matters more now. See our posts on the [50% wage rule](/blog/payroll-ready-for-new-labour-codes-50-percent-wage-rule/) and the [salary-structure risk](/blog/hidden-risk-in-your-salary-structure/).
+
+TeamIndia Compliance can run the coverage and cost assessment for you. [Book a free consultation](/#contact).
+
+*General information, not legal advice. Summarised from the EY PAS Alert of 17 September 2026 and cross-checked with BDO and SCC Online. We could not open the Gazette text, so confirm the notification number and details against the Gazette or the Ministry of Labour site.*"""),
 ]

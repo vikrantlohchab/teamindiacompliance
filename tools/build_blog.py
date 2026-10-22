@@ -11,6 +11,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 from blog_content import POSTS
+CARDS = sorted(POSTS, key=lambda p: p["date"], reverse=True)  # newest first, stable
 
 BASE = "https://teamindiacompliance.com"
 PHONE_DISPLAY, PHONE_TEL = "+91 86838 52482", "+918683852482"
@@ -140,7 +141,7 @@ PUBLISHED = []
 # ---------- posts ----------
 for n, p in enumerate(POSTS):
     path = f"/blog/{p['slug']}/"
-    others = [q for q in POSTS if q is not p]
+    others = [q for q in CARDS if q is not p]
     side_posts = "".join(f'<li><a href="/blog/{q["slug"]}/">{esc(q["h1"])}</a></li>' for q in others[:4])
     side_svc = "".join(f'<li><a href="/services/{s}/">{SVC_NAMES[s]}</a></li>' for s in p["related"])
     meta = f'<div class="post-meta"><span class="service-tag popular">{esc(p["cat"])}</span><span>{fmt_date(p["date"])}</span><span>{p["mins"]} min read</span><span>By TeamIndia Compliance Team</span></div>'
@@ -166,7 +167,7 @@ for n, p in enumerate(POSTS):
   </section>
 
   <section class="section" style="padding-top:0"><div class="container"><div class="side-card" style="text-align:center;padding:40px">
-      <h3>Not sure how your salary structure is classified?</h3><p style="margin:12px 0 22px">Our team can review your pay components and PF position and give a tailored proposal within 4 working hours.</p>
+      <h3>Not sure how this applies to your payroll?</h3><p style="margin:12px 0 22px">Our team can review your pay components and PF position and give a tailored proposal within 4 working hours.</p>
       <a href="/#contact" class="btn btn-primary">Request Free Consultation →</a></div></div></section>"""
     post_ld = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": p["h1"], "description": p["desc"],
                "image": f"{BASE}/blog/images/{p['image']}.png", "datePublished": p["date"], "dateModified": p["date"],
@@ -177,7 +178,7 @@ for n, p in enumerate(POSTS):
     PUBLISHED.append(path)
 
 # ---------- index ----------
-cards = "\n        ".join(card_html(p) for p in POSTS)
+cards = "\n        ".join(card_html(p) for p in CARDS)
 index_main = f"""  <section class="section">
     <div class="container">
       <div class="blog-grid">
@@ -228,7 +229,7 @@ for f in glob.glob("**/index.html", recursive=True) + ["index.html", "404.html"]
     write(f, s)
 
 # ---------- related reading on service pages ----------
-RELATED = {"epf-registration": [0, 4], "payroll-processing": [1, 2], "statutory-audit": [3, 0], "hr-consultancy": [2, 3], "government-liaisoning": [0, 3]}
+RELATED = {"epf-registration": [5, 0, 4], "payroll-processing": [5, 1, 2], "statutory-audit": [3, 0], "hr-consultancy": [2, 3], "government-liaisoning": [0, 3]}
 for svc, idx in RELATED.items():
     f = f"services/{svc}/index.html"
     s = read(f)
@@ -242,7 +243,7 @@ for svc, idx in RELATED.items():
 # ---------- home page: Insights section ----------
 s = read("index.html")
 s = re.sub(r"<!-- INSIGHTS -->.*?<!-- /INSIGHTS -->\s*", "", s, flags=re.S)
-home_cards = "\n        ".join(card_html(p) for p in POSTS[:3])
+home_cards = "\n        ".join(card_html(p) for p in CARDS[:3])
 ins = f"""<!-- INSIGHTS -->
   <section class="section services" id="blog">
     <div class="container">

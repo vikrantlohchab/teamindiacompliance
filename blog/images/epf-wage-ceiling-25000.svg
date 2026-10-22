@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Two bars comparing the old 15,000 rupee and new 25,000 rupee EPF wage ceiling">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0A2463"/><stop offset="1" stop-color="#071840"/></linearGradient>
+<pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".05"/></pattern></defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#grid)"/>
+<circle cx="1080" cy="80" r="260" fill="#E87722" opacity=".08"/><circle cx="80" cy="600" r="220" fill="#2E9E3F" opacity=".10"/>
+<line x1="260" y1="500" x2="940" y2="500" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="3"/>
+<rect x="330" y="300" width="200" height="200" rx="14" fill="#FFFFFF" opacity=".92"/>
+<rect x="650" y="120" width="200" height="380" rx="14" fill="#E87722"/>
+<line x1="300" y1="300" x2="880" y2="300" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="4" stroke-dasharray="14 10"/>
+<text x="430" y="410" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="46" font-weight="800" fill="#0A2463">₹15,000</text>
+<text x="750" y="330" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="46" font-weight="800" fill="#FFFFFF">₹25,000</text>
+<path d="M545 395 C 580 395 590 330 628 250" fill="none" stroke="#2E9E3F" stroke-width="10" stroke-linecap="round"/>
+<path d="M600 262 L632 238 L640 278 Z" fill="#2E9E3F"/>
+<rect y="614" width="400" height="16" fill="#E87722"/><rect x="400" y="614" width="400" height="16" fill="#FFFFFF"/><rect x="800" y="614" width="400" height="16" fill="#2E9E3F"/>
+</svg>
