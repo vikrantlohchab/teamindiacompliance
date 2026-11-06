@@ -1387,7 +1387,7 @@ a.service-card { display: block; color: inherit; }
 /* === ASSESSMENT === */
 .sa { max-width: 860px; margin: 0 auto; background: #fff; border: 1px solid var(--border); border-radius: 24px; box-shadow: var(--shadow-lg); padding: 44px; position: relative; overflow: hidden; }
 .sa::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, var(--saffron) 0 33.3%, #e5e7eb 33.3% 66.6%, var(--green) 66.6%); }
-.sa h2 { font-size: 34px; margin-bottom: 14px; }
+.sa h1, .sa h2 { font-size: 34px; margin-bottom: 14px; }
 .sa-pane > p { font-size: 17px; line-height: 1.7; margin-bottom: 20px; }
 .sa-sub { font-size: 15px; margin-bottom: 22px; }
 .sa-points { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; margin: 8px 0 28px; }
@@ -1463,7 +1463,7 @@ a.service-card { display: block; color: inherit; }
 .rp-cta .sa-link { color: #fff; opacity: .9; }
 @media (max-width: 700px) {
   .sa { padding: 28px 20px; border-radius: 18px; }
-  .sa h2 { font-size: 26px; } #sa-qtext { font-size: 20px; }
+  .sa h1, .sa h2 { font-size: 26px; } #sa-qtext { font-size: 20px; }
   .sa-points, .sa-grid, .areas { grid-template-columns: 1fr; }
   .rp-meta { grid-template-columns: 1fr 1fr; }
   .rp-score { padding: 22px 14px; }

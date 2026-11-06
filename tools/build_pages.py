@@ -176,12 +176,12 @@ SCORE_FAQS = [("What is the TeamIndia Compliance Index (TCI) self-assessment?", 
               ("Is this score a legal opinion or an audit?", "No. It is an indicative score based only on your own answers. For a verified, in-depth analysis of your actual records, contact TeamIndia Compliance."),
               ("What do I get in a detailed report?", "We review your registrations, filings, payroll and contractor records and give you a verified report that shows what you comply with, the gaps, and a prioritised fix plan.")]
 spath = "/compliance-score/"
-WIDGET = """<section class="section" id="assessment" style="padding-top:24px">
+WIDGET = """<section class="section" id="assessment" style="padding-top:40px">
     <div class="container">
       <div class="sa" id="sa">
         <div id="sa-intro" class="sa-pane">
           <span class="eyebrow">Free self-assessment</span>
-          <h2 data-focus>How compliant are you? Find out in about 3 minutes.</h2>
+          <h1 data-focus>How compliant are you? Find out in about 3 minutes.</h1>
           <p>Answer 10 questions and get an instant, printable report with your preliminary TeamIndia Compliance Index (TCI) score, your strong and weak areas, and what to fix first.</p>
           <ul class="sa-points"><li>10 questions, one at a time</li><li>Score out of 100 with an area-wise breakdown</li><li>Print or save as PDF</li><li>Private: everything stays in your browser</li></ul>
           <button type="button" id="sa-start" class="btn btn-primary">Start the assessment →</button>
@@ -225,6 +225,8 @@ out = page("Compliance Score Check: Free TCI Self-Assessment & Report | TeamIndi
       "Answer 10 quick questions and get an instant, printable compliance report. Everything stays in your browser.", smain,
       side([svc_link(r) for r in ("hr-compliance-audit", "payroll-audit", "contractor-compliance-audit")], "Detailed audits"),
       [service_ld("Compliance score and compliance report", "A free self-assessment that gives a preliminary compliance score out of 100 and a printable report.", spath)])
+out = re.sub(r'  <section class="hero sub">.*?</section>\n\n', '', out, count=1, flags=re.S)   # no hero: the assessment is the page
+out = re.sub(r'<div class="side-card"><h4>Detailed audits</h4>.*?</div>', '', out, count=1, flags=re.S)
 k = '  <section class="section">\n    <div class="container page-grid">'
 assert k in out
 out = out.replace(k, WIDGET + k, 1).replace("</body>", '<script src="/score.js" defer></script>\n</body>', 1)
