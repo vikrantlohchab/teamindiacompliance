@@ -1481,3 +1481,11 @@ a.service-card { display: block; color: inherit; }
   .rp-actions li, .rp-row, .rp-score { break-inside: avoid; }
   .needle { transition: none; }
 }
+
+.sa-help { max-width: 860px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 28px; background: linear-gradient(135deg, var(--navy), #133272); border-radius: 20px; padding: 28px 32px; color: #fff; }
+.sa-help h3 { color: #fff; font-size: 22px; margin-bottom: 8px; }
+.sa-help p { color: rgba(255, 255, 255, .85); font-size: 15px; line-height: 1.6; }
+.sa-help-btns { display: flex; flex-direction: column; gap: 10px; flex: none; }
+.sa-help .btn { justify-content: center; }
+.sa-help .btn-secondary { background: transparent; color: #fff; border: 1.5px solid rgba(255, 255, 255, .6); }
+@media (max-width: 760px) { .sa-help { flex-direction: column; align-items: stretch; padding: 24px 20px; } }

@@ -226,10 +226,16 @@ out = page("Compliance Score Check: Free TCI Self-Assessment & Report | TeamIndi
       side([svc_link(r) for r in ("hr-compliance-audit", "payroll-audit", "contractor-compliance-audit")], "Detailed audits"),
       [service_ld("Compliance score and compliance report", "A free self-assessment that gives a preliminary compliance score out of 100 and a printable report.", spath)])
 out = re.sub(r'  <section class="hero sub">.*?</section>\n\n', '', out, count=1, flags=re.S)   # no hero: the assessment is the page
-out = re.sub(r'<div class="side-card"><h4>Detailed audits</h4>.*?</div>', '', out, count=1, flags=re.S)
-k = '  <section class="section">\n    <div class="container page-grid">'
-assert k in out
-out = out.replace(k, WIDGET + k, 1).replace("</body>", '<script src="/score.js" defer></script>\n</body>', 1)
+out = re.sub(r'<section class="section">\s*<div class="container page-grid">.*?</section>\s*', '', out, count=1, flags=re.S)
+out = re.sub(r'<section class="section" style="padding-top:0">.*?</section>\s*', '', out, count=1, flags=re.S)
+HELP = f"""<section class="section" style="padding-top:0"><div class="container"><div class="sa-help">
+    <div><h3>Need in-depth analysis and compliance help?</h3><p>A self-assessment shows the direction. Our experts review your actual registrations, filings, payroll and contractor records and give you a verified report with a prioritised fix plan.</p></div>
+    <div class="sa-help-btns"><a href="/#contact" class="btn btn-primary">Free Consultation →</a> {WA_BTN("score-page-main", "btn btn-secondary", label="💬 WhatsApp us", msg="Hi TeamIndia Compliance, I would like in-depth analysis and compliance help for my business.")}</div>
+  </div></div></section>
+
+  """
+assert "<!-- FOOTER -->" in out
+out = out.replace("<!-- FOOTER -->", WIDGET + HELP + "<!-- FOOTER -->", 1).replace("</body>", '<script src="/score.js" defer></script>\n</body>', 1)
 write("compliance-score/index.html", out)
 URLS.append((spath, "0.9"))
 
