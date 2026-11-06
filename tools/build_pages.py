@@ -254,7 +254,7 @@ audits = f"""<!-- AUDITS -->
       <div class="section-head">
         <span class="eyebrow">Compliance Audits</span>
         <h2>Know Exactly Where You Stand</h2>
-        <p>Independent audits that show your risks, quantify the exposure and give you a plan to fix it.</p>
+        <p>Independent audits that show your risks, quantify the exposure and give you a fix plan.</p>
       </div>
       <div class="service-grid" style="grid-template-columns:repeat(4,1fr)">{acards}</div>
       <p style="text-align:center;margin-top:32px">{WA_BTN("audit-health-check", "btn btn-primary", label="💬 Free Compliance Health Check on WhatsApp", msg="Hi TeamIndia Compliance, I would like a free compliance health check for my business.")} {WA_BTN("audit-sample-report", label="Request a sample audit report", msg="Hi TeamIndia Compliance, please share a sample audit report.")}</p>
