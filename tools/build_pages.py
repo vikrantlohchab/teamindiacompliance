@@ -148,7 +148,7 @@ for a in AUDITS:
     if a["slug"] == "hr-compliance-audit":
         tci = f"""<h2 id="tci">TeamIndia Compliance Index (TCI)</h2>
         <p>The TeamIndia Compliance Index (TCI) gives your compliance position a clear, trackable rating, so you can see where you stand today and measure progress after each audit.</p>
-        <p>{WA_BTN("sample-report", msg="Hi TeamIndia Compliance, I would like to see a sample HR compliance audit report and know more about the TeamIndia Compliance Index (TCI).", label="💬 Request a sample audit report")}</p>"""
+        <p><a href="/compliance-score/" class="btn btn-primary">Check Your Compliance Score →</a> {WA_BTN("sample-report", msg="Hi TeamIndia Compliance, I would like to see a sample HR compliance audit report and know more about the TeamIndia Compliance Index (TCI).", label="💬 Request a sample audit report")}</p>"""
     main = f"""<h2>Why a {a['name'].lower()}?</h2>
         {''.join(f'<p>{esc(p)}</p>' for p in a['who'])}
         <h2>What we review</h2>
@@ -168,6 +168,33 @@ for a in AUDITS:
           side([svc_link(r) for r in a["related"]], "Related services"),
           [service_ld(a["name"], a["desc"], path), faq_ld(a["faqs"])]))
     URLS.append((path, "0.9"))
+
+# ---------- compliance score page ----------
+SCORE_FAQS = [("Is the compliance health check free?", "Yes. You can start with a free compliance health check on WhatsApp. A detailed audit is scoped and quoted after that."),
+              ("What do I get at the end?", "A compliance report that shows what you already comply with, where the gaps are, and what to do next in priority order."),
+              ("What do you need from me?", "A few basics such as your registrations, a recent payroll and PF/ESIC filing, and details of your locations and contractors. We tell you exactly what to share."),
+              ("How long does it take?", "It depends on the number of locations and the volume of records. We confirm the timeline when we scope the work.")]
+spath = "/compliance-score/"
+smain = f"""<h2>One report. Complete clarity.</h2>
+        <p>Most businesses know they have compliance obligations but not exactly where they stand. We give you a compliance report that removes the guesswork: it shows what you are already complying with, where you fall short, and what you need to do next.</p>
+        <h2>What the report tells you</h2>
+        <ul><li><strong>What you comply with:</strong> the registrations, filings and practices that are in order.</li><li><strong>Where the gaps are:</strong> missing registrations, late or mismatched filings, wage-structure and contractor risks, each rated by risk.</li><li><strong>What to do next:</strong> a prioritised action list with owners and deadlines, so you can fix the most serious gaps first.</li></ul>
+        <h2>What we check</h2>
+        <ul><li>EPF and ESIC registration, monthly filings and coverage, including the ₹25,000 PF wage ceiling</li><li>Payroll and salary structure against the Code on Wages</li><li>Shops &amp; Establishments, factory and contract-labour licences</li><li>Contractor compliance: licences, wage payment, PF and ESIC remittance</li><li>HR policies, appointment letters and POSH compliance</li><li>Labour Codes readiness</li></ul>
+        <h2>How it works</h2>
+        <ol><li>Message us on WhatsApp or send an enquiry.</li><li>Share a few documents and details about your locations.</li><li>We review your records and filings.</li><li>You get the report and a walkthrough of the findings and next steps.</li></ol>
+        <p>{WA_BTN("score-page-main", "btn btn-primary", label="💬 Start my free compliance health check", msg="Hi TeamIndia Compliance, I would like to check my compliance score and get a compliance report.")} {WA_BTN("score-page-sample", label="Request a sample report", msg="Hi TeamIndia Compliance, please share a sample compliance report.")}</p>
+        <h2>Who it is for</h2>
+        <p>Employers of any size: new companies setting up, growing teams crossing PF and ESIC thresholds, factories with contract labour, and businesses facing an inspection, a client audit or an investor review. See our <a href="/services/hr-compliance-audit/">HR compliance audit</a>, <a href="/services/payroll-audit/">payroll audit</a> and <a href="/services/contractor-compliance-audit/">contractor compliance audit</a> for the detailed audits.</p>
+        <h2>Frequently asked questions</h2>
+        <div class="faq-list">{faq_html(SCORE_FAQS)}</div>"""
+write("compliance-score/index.html", page("Check Your Compliance Score | Free Compliance Health Check | TeamIndia Compliance",
+      "Get a compliance report that shows what you already comply with, where the gaps are and what to do next. Start with a free compliance health check.",
+      spath, [("Home", "/"), ("Check Your Compliance Score", spath)], "Check Your Compliance Score",
+      "Get a compliance report that shows what you comply with, where the gaps are, and what to do next.", smain,
+      side([svc_link(r) for r in ("hr-compliance-audit", "payroll-audit", "contractor-compliance-audit")], "Detailed audits"),
+      [service_ld("Compliance score and compliance report", "A compliance report showing what an employer complies with, the gaps, and the next steps.", spath), faq_ld(SCORE_FAQS)]))
+URLS.append((spath, "0.9"))
 
 # ---------- location pages ----------
 ALL_LOC_LINKS = [("Delhi", "delhi"), ("Gurugram", "gurugram"), ("Noida", "noida"), ("Haryana", "haryana"), ("Delhi NCR", "delhi-ncr")] + [(l["name"], l["slug"]) for l in LOCS]
@@ -257,7 +284,7 @@ audits = f"""<!-- AUDITS -->
         <p>Independent audits that show your risks, quantify the exposure and give you a fix plan.</p>
       </div>
       <div class="service-grid" style="grid-template-columns:repeat(4,1fr)">{acards}</div>
-      <p style="text-align:center;margin-top:32px">{WA_BTN("audit-health-check", "btn btn-primary", label="💬 Free Compliance Health Check on WhatsApp", msg="Hi TeamIndia Compliance, I would like a free compliance health check for my business.")} {WA_BTN("audit-sample-report", label="Request a sample audit report", msg="Hi TeamIndia Compliance, please share a sample audit report.")}</p>
+      <p style="text-align:center;margin-top:32px"><a href="/compliance-score/" class="btn btn-primary">Check Your Compliance Score →</a> {WA_BTN("audit-health-check", "btn btn-secondary", label="💬 Free Compliance Health Check on WhatsApp", msg="Hi TeamIndia Compliance, I would like a free compliance health check for my business.")} {WA_BTN("audit-sample-report", label="Request a sample audit report", msg="Hi TeamIndia Compliance, please share a sample audit report.")}</p>
     </div>
   </section>
   <!-- /AUDITS -->
@@ -269,6 +296,10 @@ if 'data-wa="contact"' not in s:
     m = re.search(r"(Mon – Sat, 9:30 AM – 7:00 PM IST</div>\s*</div>\s*</div>\s*</div>)", s)
     assert m
     s = s.replace(m.group(1), m.group(1) + "\n        " + WA_BTN("contact", "btn btn-secondary", "margin-top:20px"), 1)
+if "/compliance-score/" not in s[s.index('class="hero-ctas"'):s.index('class="hero-ctas"') + 700]:
+    k = '<a href="#services" class="btn btn-secondary">Explore Our Services</a>'
+    assert k in s
+    s = s.replace(k, k + '\n          <a href="/compliance-score/" class="btn btn-secondary" style="border-color:var(--saffron);color:var(--saffron)">Check Your Compliance Score</a>', 1)
 # schema: drop unverified legal name, widen area served
 def fix_ld(m):
     d = json.loads(m.group(1))
