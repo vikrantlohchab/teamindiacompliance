@@ -82,8 +82,13 @@
               <label>City / State *<input id="sa-city" required placeholder="e.g. Gurugram, Haryana"></label>
               <label>Industry<select id="sa-industry"></select></label>
               <label>Approximate employee strength<select id="sa-size"></select></label>
+              <label id="sa-phone-wrap" hidden>WhatsApp number *<input id="sa-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210"><span id="sa-phone-err" class="sa-err" hidden>Please enter a valid WhatsApp number, e.g. +91 98765 43210</span></label>
             </div>
-            <div class="sa-nav"><button type="button" id="sa-formback" class="sa-link">← Back</button><button type="submit" class="btn btn-primary">Generate my report →</button></div>
+            <div id="sa-consent-wrap" hidden>
+              <label class="sa-consent"><input type="checkbox" id="sa-consent"> <span>I agree to receive my report on WhatsApp at this number and to be contacted by TeamIndia Compliance about it. See our <a href="/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>
+              <div id="sa-turnstile"></div>
+            </div>
+            <div class="sa-nav"><button type="button" id="sa-formback" class="sa-link">← Back</button><button type="submit" id="sa-submit" class="btn btn-primary">Generate my report →</button></div>
           </form>
         </div>
         <div id="sa-report" class="sa-pane" hidden></div>
@@ -129,7 +134,7 @@
         <div class="footer-col">
           <h4>Legal</h4>
           <ul>
-            <li><a>Privacy Policy</a></li>
+            <li><a href="/privacy-policy/">Privacy Policy</a></li>
             <li><a>Terms of Service</a></li>
             <li><a>Refund Policy</a></li>
             <li><a>Cookies Policy</a></li>
@@ -147,6 +152,7 @@
     </div>
   </footer>
 
+<script>window.TCI_CONFIG = { endpoint: "", turnstileSiteKey: "" };</script>
 <script src="/score.js" defer></script>
 <script src="/wa.js" defer></script>
 </body>

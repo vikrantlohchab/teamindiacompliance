@@ -3,6 +3,10 @@
   var root = document.getElementById("sa");
   if (!root) return;
   var WA = "918683852482";
+  var CFG = window.TCI_CONFIG || {};            // set endpoint (+ turnstileSiteKey) once the WhatsApp delivery Worker is live
+  var DELIVERY = !!CFG.endpoint;
+  var JSPDF_URL = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
+  var LEAD_FORM = { url: "https://api.web3forms.com/submit", key: "6a21b648-57e9-4ea3-840d-1ac461467d14" };
   var OPTS = [
     { k: "yes", label: "Yes – Fully implemented", pts: 10 },
     { k: "partial", label: "Partially implemented", pts: 5 },
@@ -123,9 +127,15 @@
     var gaps = Q.map(function (q, i) { return { q: q, i: i, pts: OPTS[ans[i]].pts, a: ans[i] }; }).filter(function (g) { return g.pts < 10; })
       .sort(function (x, y) { return x.pts - y.pts || x.i - y.i; });
     var d = new Date().toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" });
+    var bandIdx = score < 60 ? 0 : score < 70 ? 1 : score < 80 ? 2 : score < 90 ? 3 : 4;
+    last = { info: info, score: score, pos: gaugePos(score), band: b, bandIdx: bandIdx, date: d, answers: ans.slice(),
+      questions: Q.map(function (q) { return { q: q.q }; }),
+      areas: order.map(function (n) { return { name: n, pct: Math.round(areas[n].p / areas[n].n * 100) }; }),
+      gaps: gaps.map(function (g) { return { area: g.q.area, a: g.a, fix: g.q.fix }; }) };
     var chip = function (a) { return '<span class="sa-chip c-' + OPTS[a].k + '">' + (a === 0 ? "Implemented" : a === 1 ? "Partial" : a === 2 ? "Not implemented" : "Not sure") + "</span>"; };
 
     el("#sa-report").innerHTML =
+      '<div id="sa-deliver" class="sa-deliver sa-noprint" hidden></div>' +
       '<div class="rp-head"><img src="/tic-logo.jpeg" alt="" width="44" height="44"><div><div class="rp-brand">TeamIndia Compliance</div><div class="rp-sub">TeamIndia Compliance Index (TCI) · Preliminary Self-Assessment Report</div></div></div>' +
       '<div class="rp-meta"><div><b>Company</b>' + esc(info.company) + '</div><div><b>Prepared for</b>' + esc(info.name) + '</div><div><b>City / State</b>' + esc(info.city) + '</div>' +
       (info.industry ? "<div><b>Industry</b>" + esc(info.industry) + "</div>" : "") + (info.size ? "<div><b>Employees</b>" + esc(info.size) + "</div>" : "") + "<div><b>Date</b>" + d + "</div></div>" +
@@ -141,18 +151,87 @@
       '<div class="rp-foot">TeamIndia Compliance · teamindiacompliance.com · +91 86838 52482 · support@teamindiacompliance.com</div>' +
       '<div class="rp-cta sa-noprint"><h3>Want a detailed, in-depth report?</h3><p>A self-assessment shows the direction. Our team reviews your actual registrations, filings, payroll and contractor records and gives you a verified report with a prioritised fix plan.</p>' +
       '<div class="rp-btns"><a id="sa-wa" class="btn btn-primary" target="_blank" rel="noopener">💬 Get a detailed report on WhatsApp</a><a class="btn btn-secondary" href="/#contact">Request free consultation</a><a class="btn btn-secondary" href="tel:+918683852482">📞 +91 86838 52482</a></div>' +
-      '<div class="rp-btns2"><button type="button" class="sa-link" id="sa-print">🖨 Print / Save as PDF</button><button type="button" class="sa-link" id="sa-retake">↻ Retake assessment</button></div></div>';
+      '<div class="rp-btns2"><button type="button" class="sa-link" id="sa-pdf">⬇ Download PDF</button><button type="button" class="sa-link" id="sa-print">🖨 Print</button><button type="button" class="sa-link" id="sa-retake">↻ Retake assessment</button></div></div>';
 
     var msg = "Hi TeamIndia Compliance, I scored " + score + "/100 (" + b.name + ") on the TCI self-assessment for " + info.company + " (" + info.city + "). I would like a detailed compliance report.";
     el("#sa-wa").href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg);
     el("#sa-wa").addEventListener("click", function () { push("tci_cta_click", { channel: "whatsapp", score: score, band: b.name }); });
     el("#sa-print").addEventListener("click", function () { push("tci_print", { score: score }); window.print(); });
+    el("#sa-pdf").addEventListener("click", function () {
+      var btn = el("#sa-pdf"), old = btn.textContent; btn.textContent = "Preparing PDF…";
+      getPdf().then(function (doc) { doc.save("TCI-Report-" + (info.company || "report").replace(/[^\w]+/g, "-").slice(0, 40) + ".pdf"); push("tci_pdf_download", { score: score }); })
+        .catch(function () { window.print(); }).then(function () { btn.textContent = old; });
+    });
     el("#sa-retake").addEventListener("click", reset);
     push("tci_complete", { score: score, band: b.name, industry: info.industry || "", size: info.size || "" });
     show("sa-report");
+    if (DELIVERY && info.phone) deliver();
     requestAnimationFrame(function () { setTimeout(function () { var n = el(".needle"); if (n) n.style.transform = "rotate(" + n.getAttribute("data-rot") + "deg)"; }, 80); });
   }
-  function reset() { ans = []; idx = 0; info = {}; el("#sa-form form").reset(); show("sa-intro"); }
+  var last = null, tsId = null;
+  function loadScript(src) {
+    return new Promise(function (ok, no) { var s2 = document.createElement("script"); s2.src = src; s2.onload = ok; s2.onerror = no; document.head.appendChild(s2); });
+  }
+  var pdfLibs = null;
+  function getPdf() {
+    pdfLibs = pdfLibs || (window.jspdf ? Promise.resolve() : loadScript(JSPDF_URL)).then(function () { return window.TCIPDF ? 0 : loadScript("/score-pdf.js"); });
+    return pdfLibs.then(function () { return window.TCIPDF.build(last, window.jspdf.jsPDF); });
+  }
+  function status(kind, html) {
+    var b = el("#sa-deliver"); if (!b) return;
+    b.hidden = false; b.className = "sa-deliver sa-noprint d-" + kind; b.innerHTML = html;
+    var r = b.querySelector("[data-retry]"); if (r) r.addEventListener("click", deliver);
+  }
+  function maskPhone(p) { return "+" + p.slice(0, p.length - 5).replace(/\d/g, "•") + p.slice(-5); }
+  function deliver() {
+    if (!last) return;
+    status("busy", '<span class="sa-spin"></span> Sending your report to WhatsApp ' + maskPhone(info.phone) + "…");
+    var token = (window.turnstile && tsId !== null) ? window.turnstile.getResponse(tsId) : "";
+    getPdf().then(function (doc) {
+      var b64 = doc.output("datauristring").split(",")[1];
+      return fetch(CFG.endpoint, { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: info.name, company: info.company, phone: info.phone, score: last.score, band: last.band.name, pdf: b64, token: token }) });
+    }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || !j.ok) throw new Error(j.error || "failed"); }); })
+      .then(function () {
+        status("ok", "✓ Your report has been sent to WhatsApp " + maskPhone(info.phone) + ". Check your chat.");
+        push("tci_whatsapp_sent", { score: last.score, band: last.band.name }); lead(true);
+      })
+      .catch(function (err) {
+        var why = { not_on_whatsapp: "This number does not appear to be on WhatsApp.", rate_limited: "Too many attempts for this number. Please try again later.", captcha: "Please complete the verification and try again." }[err && err.message] || "We could not send the report to WhatsApp.";
+        status("err", why + ' You can still download or print the report below. <button type="button" class="sa-link" data-retry>Try again</button>');
+        push("tci_whatsapp_failed", {}); lead(false);
+      });
+    try { if (window.turnstile && tsId !== null) window.turnstile.reset(tsId); } catch (e) {}
+  }
+  var leadSent = false;
+  function lead(delivered) {          // lead notification to the team (consented; reuses the site's Web3Forms inbox)
+    if (leadSent || !info.consent) return; leadSent = true;
+    try {
+      var f = new FormData();
+      f.append("access_key", LEAD_FORM.key); f.append("from_name", "TeamIndia Compliance TCI"); f.append("subject", "TCI self-assessment lead: " + info.company + " (" + last.score + "/100)");
+      f.append("name", info.name); f.append("company", info.company); f.append("phone", "+" + info.phone); f.append("city", info.city);
+      f.append("industry", info.industry || ""); f.append("employees", info.size || ""); f.append("score", last.score + "/100"); f.append("band", last.band.name);
+      f.append("whatsapp_report_delivered", delivered ? "yes" : "no"); f.append("consent", "Agreed to receive the report on WhatsApp and be contacted");
+      fetch(LEAD_FORM.url, { method: "POST", body: f, headers: { Accept: "application/json" } });
+    } catch (e) {}
+  }
+  function normPhone(v) {
+    var d = String(v || "").replace(/[\s\-().]/g, ""), plus = d.charAt(0) === "+"; d = d.replace(/\D/g, "");
+    if (!plus) { if (d.length === 10 && /^[6-9]/.test(d)) d = "91" + d; else if (d.length === 11 && d.charAt(0) === "0") d = "91" + d.slice(1); }
+    return /^\d{11,15}$/.test(d) && (plus || /^91[6-9]\d{9}$/.test(d)) ? d : "";
+  }
+  function setupDelivery() {
+    if (!DELIVERY) return;
+    el("#sa-phone-wrap").hidden = false; el("#sa-consent-wrap").hidden = false;
+    el("#sa-phone").required = true; el("#sa-consent").required = true;
+    el("#sa-submit").textContent = "Generate & send my report →";
+    if (CFG.turnstileSiteKey) {
+      loadScript("https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit").then(function () {
+        tsId = window.turnstile.render("#sa-turnstile", { sitekey: CFG.turnstileSiteKey });
+      }).catch(function () {});
+    }
+  }
+  function reset() { leadSent = false; last = null; ans = []; idx = 0; info = {}; el("#sa-form form").reset(); show("sa-intro"); }
 
   el("#sa-start").addEventListener("click", function () { if (timer) { clearTimeout(timer); timer = null; } idx = 0; ans = []; renderQ(); show("sa-q"); push("tci_start", {}); });
   el("#sa-opts").addEventListener("click", function (e) { var b = e.target.closest(".sa-opt"); if (b) pick(+b.getAttribute("data-i")); });
@@ -165,6 +244,11 @@
   el("#sa-form form").addEventListener("submit", function (e) {
     e.preventDefault();
     info = { name: el("#sa-name").value.trim(), company: el("#sa-company").value.trim(), city: el("#sa-city").value.trim(), industry: el("#sa-industry").value, size: el("#sa-size").value };
+    if (DELIVERY) {
+      var ph = normPhone(el("#sa-phone").value), perr = el("#sa-phone-err");
+      if (!ph) { perr.hidden = false; el("#sa-phone").focus(); return; }
+      perr.hidden = true; info.phone = ph; info.consent = el("#sa-consent").checked;
+    }
     var missing = -1;
     for (var m = 0; m < Q.length; m++) if (ans[m] === undefined) { missing = m; break; }
     if (missing >= 0) { idx = missing; renderQ(); show("sa-q"); return; }
@@ -173,5 +257,6 @@
       show("sa-report");
     }
   });
+  setupDelivery();
   el("#sa-formback").addEventListener("click", function () { if (timer) { clearTimeout(timer); timer = null; } idx = Q.length - 1; renderQ(); show("sa-q"); });
 })();

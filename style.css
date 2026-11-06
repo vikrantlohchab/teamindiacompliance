@@ -1489,3 +1489,14 @@ a.service-card { display: block; color: inherit; }
 .sa-help .btn { justify-content: center; }
 .sa-help .btn-secondary { background: transparent; color: #fff; border: 1.5px solid rgba(255, 255, 255, .6); }
 @media (max-width: 760px) { .sa-help { flex-direction: column; align-items: stretch; padding: 24px 20px; } }
+
+/* WhatsApp delivery UI */
+.sa-err { color: #B42318; font-weight: 500; font-size: 12px; }
+.sa-consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 18px; font-size: 13px; line-height: 1.55; color: var(--muted); font-weight: 500; }
+.sa-consent input { margin-top: 3px; accent-color: var(--saffron); width: 16px; height: 16px; flex: none; }
+.sa-consent a { color: var(--saffron); font-weight: 600; }
+#sa-turnstile { margin-top: 14px; }
+.sa-deliver { border-radius: 12px; padding: 12px 16px; margin-bottom: 18px; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.d-busy { background: #EEF2FF; color: var(--navy); } .d-ok { background: var(--green-light); color: var(--green); } .d-err { background: #FDE3E3; color: #B42318; }
+.sa-spin { width: 16px; height: 16px; border: 2.5px solid rgba(10, 36, 99, .25); border-top-color: var(--navy); border-radius: 50%; animation: sa-rot .8s linear infinite; }
+@keyframes sa-rot { to { transform: rotate(360deg); } }

@@ -1,0 +1,15 @@
+name = "tci-whatsapp-report"
+main = "index.js"
+compatibility_date = "2025-01-01"
+
+[vars]
+WA_TEMPLATE = "tci_report_delivery"
+WA_LANG = "en"
+GRAPH_VERSION = "v21.0"          # use a Graph API version that Meta still supports
+ALLOW_ORIGINS = "https://teamindiacompliance.com,https://www.teamindiacompliance.com"
+
+# Secrets (set with `npx wrangler secret put NAME`): WA_TOKEN, WA_PHONE_ID, TURNSTILE_SECRET
+# Rate-limit store: `npx wrangler kv namespace create RL` then paste the id below.
+# [[kv_namespaces]]
+# binding = "RL"
+# id = "PASTE_KV_NAMESPACE_ID"

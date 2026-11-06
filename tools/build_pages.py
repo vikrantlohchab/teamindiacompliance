@@ -45,6 +45,8 @@ if 'href="/locations/"' not in FOOTER:
     k = '<li><a href="/locations/delhi-ncr/">Delhi NCR</a></li>'
     assert k in FOOTER; FOOTER = FOOTER.replace(k, k + '<li><a href="/locations/">All locations →</a></li>', 1)
 
+FOOTER = FOOTER.replace('<li><a>Privacy Policy</a></li>', '<li><a href="/privacy-policy/">Privacy Policy</a></li>')
+
 def head(title, desc, path, lds):
     return f"""<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -205,8 +207,13 @@ WIDGET = """<section class="section" id="assessment" style="padding-top:40px">
               <label>City / State *<input id="sa-city" required placeholder="e.g. Gurugram, Haryana"></label>
               <label>Industry<select id="sa-industry"></select></label>
               <label>Approximate employee strength<select id="sa-size"></select></label>
+              <label id="sa-phone-wrap" hidden>WhatsApp number *<input id="sa-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210"><span id="sa-phone-err" class="sa-err" hidden>Please enter a valid WhatsApp number, e.g. +91 98765 43210</span></label>
             </div>
-            <div class="sa-nav"><button type="button" id="sa-formback" class="sa-link">← Back</button><button type="submit" class="btn btn-primary">Generate my report →</button></div>
+            <div id="sa-consent-wrap" hidden>
+              <label class="sa-consent"><input type="checkbox" id="sa-consent"> <span>I agree to receive my report on WhatsApp at this number and to be contacted by TeamIndia Compliance about it. See our <a href="/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>
+              <div id="sa-turnstile"></div>
+            </div>
+            <div class="sa-nav"><button type="button" id="sa-formback" class="sa-link">← Back</button><button type="submit" id="sa-submit" class="btn btn-primary">Generate my report →</button></div>
           </form>
         </div>
         <div id="sa-report" class="sa-pane" hidden></div>
@@ -235,9 +242,30 @@ HELP = f"""<section class="section" style="padding-top:0"><div class="container"
 
   """
 assert "<!-- FOOTER -->" in out
-out = out.replace("<!-- FOOTER -->", WIDGET + HELP + "<!-- FOOTER -->", 1).replace("</body>", '<script src="/score.js" defer></script>\n</body>', 1)
+out = out.replace("<!-- FOOTER -->", WIDGET + HELP + "<!-- FOOTER -->", 1).replace("</body>", '<script>window.TCI_CONFIG = { endpoint: "", turnstileSiteKey: "" };</script>\n<script src="/score.js" defer></script>\n</body>', 1)
 write("compliance-score/index.html", out)
 URLS.append((spath, "0.9"))
+
+# ---------- privacy policy ----------
+ppath = "/privacy-policy/"
+pmain = """<p><em>Last updated: 6 November 2026</em></p>
+        <h2>Who we are</h2>
+        <p>This website, teamindiacompliance.com, is run by TeamIndia Compliance, Gurugram, Haryana, India. You can reach us at <a href="mailto:support@teamindiacompliance.com">support@teamindiacompliance.com</a> or +91 86838 52482.</p>
+        <h2>What we collect and why</h2>
+        <ul><li><strong>Enquiry form:</strong> name, email, phone, company and your message, so we can respond to you.</li>
+        <li><strong>Compliance score self-assessment:</strong> your answers are processed in your browser and are not sent to us. Only if you enter a WhatsApp number and agree, we receive your name, company, city, WhatsApp number, score and the report PDF so that we can send the report to you on WhatsApp, and we may contact you about it.</li>
+        <li><strong>WhatsApp and call buttons:</strong> clicking opens WhatsApp or your phone. The message you send is received on our WhatsApp Business number.</li></ul>
+        <h2>Who we share it with</h2>
+        <p>We do not sell your data. We use service providers to run the site and deliver your report: Meta (WhatsApp Business Platform), Cloudflare (to process the request and protect against abuse), Web3Forms (to email us your enquiry) and GitHub Pages (website hosting). They process data only to provide those services.</p>
+        <h2>How long we keep it</h2>
+        <p>The report PDF is not stored on our servers after it is sent. Enquiries and lead details are kept in our email and WhatsApp Business records for as long as needed to respond to you and for our business records.</p>
+        <h2>Your choices and rights</h2>
+        <p>You can ask us to access, correct or delete your personal data, or withdraw your consent to being contacted, at any time by emailing <a href="mailto:support@teamindiacompliance.com">support@teamindiacompliance.com</a>. You can also reply STOP on WhatsApp.</p>
+        <h2>Security and changes</h2>
+        <p>We take reasonable steps to protect your data. We may update this policy and will change the date above when we do.</p>"""
+write("privacy-policy/index.html", page("Privacy Policy | TeamIndia Compliance", "How TeamIndia Compliance collects, uses and protects your personal data, including when you request your compliance report on WhatsApp.", ppath,
+      [("Home", "/"), ("Privacy Policy", ppath)], "Privacy Policy", "How we collect, use and protect your personal data.", pmain, side([svc_link(r) for r in ("hr-compliance-audit", "payroll-audit")], "Our services"), []))
+URLS.append((ppath, "0.3"))
 
 # ---------- location pages ----------
 ALL_LOC_LINKS = [("Delhi", "delhi"), ("Gurugram", "gurugram"), ("Noida", "noida"), ("Haryana", "haryana"), ("Delhi NCR", "delhi-ncr")] + [(l["name"], l["slug"]) for l in LOCS]
