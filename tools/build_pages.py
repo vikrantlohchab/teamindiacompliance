@@ -215,23 +215,16 @@ WIDGET = """<section class="section" id="assessment" style="padding-top:24px">
   </section>
 
   """
-smain = f"""<h2>How the TCI score works</h2>
-        <p>Each of the ten questions is worth up to 10 points. Your preliminary score is the total, out of 100.</p>
-        <div class="tbl"><table><thead><tr><th>Your answer</th><th>Points</th></tr></thead><tbody><tr><td>Yes – Fully implemented</td><td>10</td></tr><tr><td>Partially implemented</td><td>5</td></tr><tr><td>No – Not implemented</td><td>0</td></tr><tr><td>Not sure</td><td>0</td></tr></tbody></table></div>
-        <div class="tbl"><table><thead><tr><th>Score</th><th>Indicative result</th></tr></thead><tbody><tr><td>90–100</td><td>Excellent</td></tr><tr><td>80–89</td><td>Good</td></tr><tr><td>70–79</td><td>Satisfactory</td></tr><tr><td>60–69</td><td>Needs Improvement</td></tr><tr><td>Below 60</td><td>Critical Attention</td></tr></tbody></table></div>
-        <h2>What the ten questions cover</h2>
-        <ul><li>Salary structure, minimum wages and statutory wage definitions</li><li>Monthly payroll verification, attendance, overtime and deductions</li><li>EPF coverage, wage calculation and contributions, including the ₹25,000 PF wage ceiling</li><li>ESIC applicability, registration and payments</li><li>Labour law registrations, licences, registers and returns</li><li>Bonus, gratuity, maternity benefits and leave</li><li>Contractor and outsourced manpower compliance</li><li>Appointment letters, employee records and HR policies</li><li>Periodic internal compliance audits</li><li>A compliance calendar and a process to track deadlines and law changes</li></ul>
-        <h2>Need a verified, in-depth report?</h2>
+smain = f"""<h2>Need a verified, in-depth report?</h2>
         <p>The self-assessment is a quick, indicative check based on your own answers. For a detailed analysis of your actual registrations, filings, payroll and contractor records, see our <a href="/services/hr-compliance-audit/">HR compliance audit</a>, <a href="/services/payroll-audit/">payroll audit</a> and <a href="/services/contractor-compliance-audit/">contractor compliance audit</a>.</p>
         <p>{WA_BTN("score-page-main", "btn btn-primary", label="💬 Talk to us about a detailed report", msg="Hi TeamIndia Compliance, I would like a detailed compliance report for my business.")}</p>
-        <h2>Frequently asked questions</h2>
-        <div class="faq-list">{faq_html(SCORE_FAQS)}</div>"""
+"""
 out = page("Compliance Score Check: Free TCI Self-Assessment & Report | TeamIndia Compliance",
       "Take the free 10-question TeamIndia Compliance Index self-assessment and get an instant, printable compliance report with your score and priority actions.",
       spath, [("Home", "/"), ("Check Your Compliance Score", spath)], "Check Your Compliance Score",
       "Answer 10 quick questions and get an instant, printable compliance report. Everything stays in your browser.", smain,
       side([svc_link(r) for r in ("hr-compliance-audit", "payroll-audit", "contractor-compliance-audit")], "Detailed audits"),
-      [service_ld("Compliance score and compliance report", "A free self-assessment that gives a preliminary compliance score out of 100 and a printable report.", spath), faq_ld(SCORE_FAQS)])
+      [service_ld("Compliance score and compliance report", "A free self-assessment that gives a preliminary compliance score out of 100 and a printable report.", spath)])
 k = '  <section class="section">\n    <div class="container page-grid">'
 assert k in out
 out = out.replace(k, WIDGET + k, 1).replace("</body>", '<script src="/score.js" defer></script>\n</body>', 1)

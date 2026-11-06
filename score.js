@@ -81,11 +81,39 @@
     el("#sa-size").innerHTML = '<option value="">Select employee strength</option>' + SIZES.map(function (x) { return "<option>" + x + "</option>"; }).join("");
   }
 
+  var SEG = [
+    { name: "Critical Attention", range: "Below 60", color: "#D64533" },
+    { name: "Needs Improvement", range: "60–69", color: "#F08A24" },
+    { name: "Satisfactory", range: "70–79", color: "#F5C518" },
+    { name: "Good", range: "80–89", color: "#8BC34A" },
+    { name: "Excellent", range: "90–100", color: "#2E9E3F" }
+  ];
+  function gaugePos(s) {
+    var idx, f;
+    if (s < 60) { idx = 0; f = s / 60; }
+    else if (s < 70) { idx = 1; f = (s - 60) / 10; }
+    else if (s < 80) { idx = 2; f = (s - 70) / 10; }
+    else if (s < 90) { idx = 3; f = (s - 80) / 10; }
+    else { idx = 4; f = Math.min(1, (s - 90) / 10); }
+    return idx + 0.1 + 0.8 * f; // keep the needle inside its colour band
+  }
+  function pt(r, deg) { var a = deg * Math.PI / 180; return [150 + r * Math.cos(a), 150 - r * Math.sin(a)]; }
+  function gauge(score) {
+    var R = 130, r = 86, gap = 1.2, paths = "";
+    SEG.forEach(function (g, i) {
+      var a0 = 180 - 36 * i - gap, a1 = 180 - 36 * (i + 1) + gap;
+      var o0 = pt(R, a0), o1 = pt(R, a1), i1 = pt(r, a1), i0 = pt(r, a0);
+      paths += '<path d="M' + o0 + " A" + R + " " + R + " 0 0 1 " + o1 + " L" + i1 + " A" + r + " " + r + " 0 0 0 " + i0 + ' Z" fill="' + g.color + '"/>';
+    });
+    var rot = -90 + 180 * gaugePos(score) / 5;
+    return '<svg class="gauge" viewBox="0 0 300 178" role="img" aria-label="Score ' + score + ' out of 100">' + paths +
+      '<g class="needle" style="transform-origin:150px 150px;transform:rotate(-90deg)" data-rot="' + rot.toFixed(1) + '"><path d="M144 150 L150 38 L156 150 Z" fill="#0A2463"/></g>' +
+      '<circle cx="150" cy="150" r="17" fill="#0A2463"/><circle cx="150" cy="150" r="7" fill="#fff"/></svg>';
+  }
   function band(score) { for (var i = 0; i < BANDS.length; i++) if (score >= BANDS[i].min) return BANDS[i]; }
   function renderReport() {
     var score = 0; ans.forEach(function (a) { score += OPTS[a].pts; });
     var b = band(score);
-    var C = 2 * Math.PI * 54, off = C * (1 - score / 100);
     var areas = {}, order = [];
     Q.forEach(function (q, i) { if (!areas[q.area]) { areas[q.area] = { p: 0, n: 0 }; order.push(q.area); } areas[q.area].p += OPTS[ans[i]].pts; areas[q.area].n += 10; });
     var gaps = Q.map(function (q, i) { return { q: q, i: i, pts: OPTS[ans[i]].pts, a: ans[i] }; }).filter(function (g) { return g.pts < 10; })
@@ -97,8 +125,9 @@
       '<div class="rp-head"><img src="/tic-logo.jpeg" alt="" width="44" height="44"><div><div class="rp-brand">TeamIndia Compliance</div><div class="rp-sub">TeamIndia Compliance Index (TCI) · Preliminary Self-Assessment Report</div></div></div>' +
       '<div class="rp-meta"><div><b>Company</b>' + esc(info.company) + '</div><div><b>Prepared for</b>' + esc(info.name) + '</div><div><b>City / State</b>' + esc(info.city) + '</div>' +
       (info.industry ? "<div><b>Industry</b>" + esc(info.industry) + "</div>" : "") + (info.size ? "<div><b>Employees</b>" + esc(info.size) + "</div>" : "") + "<div><b>Date</b>" + d + "</div></div>" +
-      '<div class="rp-score"><div class="ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="54" class="ring-bg"/><circle cx="60" cy="60" r="54" class="ring-fg ' + b.cls + '" stroke-dasharray="' + C.toFixed(1) + '" stroke-dashoffset="' + C.toFixed(1) + '" data-off="' + off.toFixed(1) + '"/></svg><div class="ring-n"><span>' + score + '</span><small>out of 100</small></div></div>' +
-      '<div><span class="band ' + b.cls + '">' + b.name + '</span><h3 class="rp-h">Your preliminary compliance score</h3><p>' + b.text + "</p></div></div>" +
+      '<div class="rp-score"><div class="gauge-wrap">' + gauge(score) + '<div class="g-num"><span>' + score + '</span><small>out of 100</small></div></div>' +
+      '<span class="band ' + b.cls + '">' + b.name + '</span><h3 class="rp-h">Your preliminary compliance score</h3><p>' + b.text + "</p>" +
+      '<div class="g-legend">' + SEG.map(function (g) { return '<span><i style="background:' + g.color + '"></i>' + g.name + " <em>" + g.range + "</em></span>"; }).join("") + "</div></div>" +
       '<h3 class="rp-sec">Score by area</h3><div class="areas">' + order.map(function (n) { var p = Math.round(areas[n].p / areas[n].n * 100); return '<div class="area"><div class="area-top"><span>' + n + "</span><b>" + p + '%</b></div><div class="area-bar"><i class="' + (p >= 80 ? "g" : p >= 50 ? "a" : "r") + '" style="width:' + p + '%"></i></div></div>'; }).join("") + "</div>" +
       '<h3 class="rp-sec">Your answers</h3><div class="rp-table">' + Q.map(function (q, i) { return '<div class="rp-row"><span class="rp-n">' + String(i + 1).padStart(2, "0") + "</span><span>" + esc(q.q) + "</span>" + chip(ans[i]) + "</div>"; }).join("") + "</div>" +
       '<h3 class="rp-sec">Priority actions</h3>' + (gaps.length ? '<ol class="rp-actions">' + gaps.map(function (g) {
@@ -117,7 +146,7 @@
     el("#sa-retake").addEventListener("click", reset);
     push("tci_complete", { score: score, band: b.name, industry: info.industry || "", size: info.size || "" });
     show("sa-report");
-    requestAnimationFrame(function () { setTimeout(function () { var fg = el(".ring-fg"); if (fg) fg.style.strokeDashoffset = fg.getAttribute("data-off"); }, 60); });
+    requestAnimationFrame(function () { setTimeout(function () { var n = el(".needle"); if (n) n.style.transform = "rotate(" + n.getAttribute("data-rot") + "deg)"; }, 80); });
   }
   function reset() { ans = []; idx = 0; info = {}; el("#sa-form form").reset(); show("sa-intro"); }
 
