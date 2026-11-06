@@ -14,7 +14,8 @@ from pages_content import LOCS, AUDITS
 BASE = "https://teamindiacompliance.com"
 LASTMOD = "2026-11-06"
 PHONE_DISPLAY, PHONE_TEL, WA = "+91 86838 52482", "+918683852482", "918683852482"
-GTM_ID = "GTM-MPGPVF47"   # Google Tag Manager container. Empty = tracking off.
+GTM_ID = "GTM-MPGPVF47"   # Google Tag Manager container (kept for future tags; no GA4 tag inside it, GA4 loads directly below).
+GA_ID = "G-JQ8XQKVY7J"    # Google Analytics 4 Measurement ID. Empty = GA4 off.
 SVC_NAMES = {"epf-registration": "EPF Registration & Compliance", "esic-registration": "ESIC Registration & Filings",
              "payroll-processing": "Payroll Processing", "factory-license": "Factory License",
              "labour-license-clra": "Labour License (CLRA)", "hr-consultancy": "HR Consultancy",
@@ -255,7 +256,7 @@ pmain = """<p><em>Last updated: 6 November 2026</em></p>
         <h2>What we collect and why</h2>
         <ul><li><strong>Enquiry form:</strong> name, email, phone, company and your message, so we can respond to you.</li>
         <li><strong>Compliance score self-assessment:</strong> your answers are processed in your browser and are not sent to us. Only if you enter a WhatsApp number and agree, we receive your name, company, city, WhatsApp number, score and the report PDF so that we can send the report to you on WhatsApp, and we may contact you about it.</li>
-        <li><strong>WhatsApp and call buttons:</strong> clicking opens WhatsApp or your phone. The message you send is received on our WhatsApp Business number.</li>""" + ("<li><strong>Website analytics:</strong> we use Google Analytics to understand how visitors use the site (pages viewed, device type, approximate location). It uses cookies and does not tell us who you are. You can block cookies in your browser or use Google's opt-out browser add-on.</li>" if GTM_ID else "") + """</ul>
+        <li><strong>WhatsApp and call buttons:</strong> clicking opens WhatsApp or your phone. The message you send is received on our WhatsApp Business number.</li>""" + ("<li><strong>Website analytics:</strong> we use Google Analytics (via Google Tag Manager) to understand how visitors use the site (pages viewed, device type, approximate location). It uses cookies and does not tell us who you are. You can block cookies in your browser or use Google's opt-out browser add-on.</li>" if GTM_ID else "") + """</ul>
         <h2>Who we share it with</h2>
         <p>We do not sell your data. We use service providers to run the site and deliver your report: Meta (WhatsApp Business Platform), Cloudflare (to process the request and protect against abuse), Web3Forms (to email us your enquiry) and GitHub Pages (website hosting). They process data only to provide those services.</p>
         <h2>How long we keep it</h2>
@@ -406,17 +407,25 @@ if "/* === WHATSAPP === */" not in css:
 @media (max-width: 700px) { #audits .service-grid { grid-template-columns: 1fr !important; } }
 """
     write("style.css", css)
-write("analytics.js", """/* Click events for Google Tag Manager (the GTM container itself is inlined in each page head). */
+write("analytics.js", """/* Google Analytics 4 (loaded directly) + click events. GA_ID is set in tools/build_pages.py. */
 (function () {
+  var ID = "%s";
   window.dataLayer = window.dataLayer || [];
+  if (ID) {
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.gtag("config", ID);
+    var s = document.createElement("script"); s.async = true; s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(ID); document.head.appendChild(s);
+  }
+  function ev(name, data) { if (window.gtag) window.gtag("event", name, data || {}); }
   document.addEventListener("click", function (e) {
     var a = e.target.closest && e.target.closest("a[href]"); if (!a) return;
     var h = a.getAttribute("href") || "";
-    if (h.indexOf("tel:") === 0) window.dataLayer.push({ event: "phone_click", link_url: h });
-    else if (h.indexOf("mailto:") === 0) window.dataLayer.push({ event: "email_click", link_url: h });
+    if (h.indexOf("tel:") === 0) ev("phone_click", { link_url: h });
+    else if (h.indexOf("mailto:") === 0) ev("email_click", { link_url: h });
   }, true);
 })();
-""")
+""" % GA_ID)
 write("wa.js", f"""(function () {{
   var N = "{WA}";
   function text() {{
@@ -429,6 +438,7 @@ write("wa.js", f"""(function () {{
     try {{
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({{ event: "whatsapp_click", wa_source: src, page_path: location.pathname }});
+      if (window.gtag) window.gtag("event", "whatsapp_click", {{ wa_source: src, page_path: location.pathname }});
     }} catch (e) {{}}
   }}
   document.querySelectorAll("[data-wa]").forEach(function (a) {{

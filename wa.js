@@ -10,6 +10,7 @@
     try {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: "whatsapp_click", wa_source: src, page_path: location.pathname });
+      if (window.gtag) window.gtag("event", "whatsapp_click", { wa_source: src, page_path: location.pathname });
     } catch (e) {}
   }
   document.querySelectorAll("[data-wa]").forEach(function (a) {

@@ -52,6 +52,7 @@
       window.dataLayer = window.dataLayer || [];
       var d = { event: ev }; for (var k in data) d[k] = data[k];
       window.dataLayer.push(d);
+      if (window.gtag) window.gtag("event", ev, data || {});
     } catch (e) {}
   }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }

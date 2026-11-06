@@ -572,7 +572,7 @@
               if (response.ok && json.success) {
                 form.hidden = true;
                 success.hidden = false;
-                (window.dataLayer = window.dataLayer || []).push({ event: 'generate_lead', form: 'contact' });
+                (window.dataLayer = window.dataLayer || []).push({ event: 'generate_lead', form: 'contact' }); if (window.gtag) window.gtag('event', 'generate_lead', { form: 'contact' });
                 success.scrollIntoView({ behavior: 'smooth', block: 'center' });
               } else {
                 throw new Error(json.message || 'Submission failed');
