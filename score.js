@@ -70,12 +70,16 @@
     }).join("");
     el("#sa-back").style.visibility = idx === 0 ? "hidden" : "visible";
   }
+  var timer = null;
   function pick(i) {
+    if (timer) return; // ignore double-clicks / key repeat while advancing
     ans[idx] = i; renderQ();
-    setTimeout(function () {
+    timer = setTimeout(function () {
+      timer = null;
       if (idx < Q.length - 1) { idx++; renderQ(); el("#sa-qtext").focus({ preventScroll: true }); } else { fillForm(); show("sa-form"); }
     }, 280);
   }
+  function back() { if (timer) { clearTimeout(timer); timer = null; } if (idx > 0) { idx--; renderQ(); } }
   function fillForm() {
     el("#sa-industry").innerHTML = '<option value="">Select industry</option>' + INDUSTRIES.map(function (x) { return "<option>" + x + "</option>"; }).join("");
     el("#sa-size").innerHTML = '<option value="">Select employee strength</option>' + SIZES.map(function (x) { return "<option>" + x + "</option>"; }).join("");
@@ -150,18 +154,24 @@
   }
   function reset() { ans = []; idx = 0; info = {}; el("#sa-form form").reset(); show("sa-intro"); }
 
-  el("#sa-start").addEventListener("click", function () { idx = 0; ans = []; renderQ(); show("sa-q"); push("tci_start", {}); });
+  el("#sa-start").addEventListener("click", function () { if (timer) { clearTimeout(timer); timer = null; } idx = 0; ans = []; renderQ(); show("sa-q"); push("tci_start", {}); });
   el("#sa-opts").addEventListener("click", function (e) { var b = e.target.closest(".sa-opt"); if (b) pick(+b.getAttribute("data-i")); });
-  el("#sa-back").addEventListener("click", function () { if (idx > 0) { idx--; renderQ(); } });
+  el("#sa-back").addEventListener("click", back);
   document.addEventListener("keydown", function (e) {
     if (el("#sa-q").hidden || e.ctrlKey || e.metaKey || e.altKey) return;
     if (e.key >= "1" && e.key <= "4") pick(+e.key - 1);
-    else if (e.key === "ArrowLeft" && idx > 0) { idx--; renderQ(); }
+    else if (e.key === "ArrowLeft") back();
   });
   el("#sa-form form").addEventListener("submit", function (e) {
     e.preventDefault();
     info = { name: el("#sa-name").value.trim(), company: el("#sa-company").value.trim(), city: el("#sa-city").value.trim(), industry: el("#sa-industry").value, size: el("#sa-size").value };
-    renderReport();
+    var missing = -1;
+    for (var m = 0; m < Q.length; m++) if (ans[m] === undefined) { missing = m; break; }
+    if (missing >= 0) { idx = missing; renderQ(); show("sa-q"); return; }
+    try { renderReport(); } catch (err) {
+      el("#sa-report").innerHTML = '<p>Sorry, we could not build your report. Please try again or <a href="/#contact">contact us</a>.</p>';
+      show("sa-report");
+    }
   });
-  el("#sa-formback").addEventListener("click", function () { idx = Q.length - 1; renderQ(); show("sa-q"); });
+  el("#sa-formback").addEventListener("click", function () { if (timer) { clearTimeout(timer); timer = null; } idx = Q.length - 1; renderQ(); show("sa-q"); });
 })();
