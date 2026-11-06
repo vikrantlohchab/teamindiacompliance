@@ -147,7 +147,7 @@ for a in AUDITS:
     tci = ""
     if a["slug"] == "hr-compliance-audit":
         tci = f"""<h2 id="tci">TeamIndia Compliance Index (TCI)</h2>
-        <p>The TeamIndia Compliance Index (TCI) gives your compliance position a clear, trackable rating, so you can see where you stand today and measure progress after each audit.</p>
+        <p>The TeamIndia Compliance Index (TCI) rates your compliance position out of 100 across ten areas, so you can see where you stand today and measure progress after each audit. Take the free self-assessment for a preliminary score and a printable report.</p>
         <p><a href="/compliance-score/" class="btn btn-primary">Check Your Compliance Score →</a> {WA_BTN("sample-report", msg="Hi TeamIndia Compliance, I would like to see a sample HR compliance audit report and know more about the TeamIndia Compliance Index (TCI).", label="💬 Request a sample audit report")}</p>"""
     main = f"""<h2>Why a {a['name'].lower()}?</h2>
         {''.join(f'<p>{esc(p)}</p>' for p in a['who'])}
@@ -169,31 +169,73 @@ for a in AUDITS:
           [service_ld(a["name"], a["desc"], path), faq_ld(a["faqs"])]))
     URLS.append((path, "0.9"))
 
-# ---------- compliance score page ----------
-SCORE_FAQS = [("Is the compliance health check free?", "Yes. You can start with a free compliance health check on WhatsApp. A detailed audit is scoped and quoted after that."),
-              ("What do I get at the end?", "A compliance report that shows what you already comply with, where the gaps are, and what to do next in priority order."),
-              ("What do you need from me?", "A few basics such as your registrations, a recent payroll and PF/ESIC filing, and details of your locations and contractors. We tell you exactly what to share."),
-              ("How long does it take?", "It depends on the number of locations and the volume of records. We confirm the timeline when we scope the work.")]
+# ---------- compliance score page (interactive self-assessment; logic in /score.js) ----------
+SCORE_FAQS = [("What is the TeamIndia Compliance Index (TCI) self-assessment?", "A 10-question self-assessment that gives you a preliminary compliance score out of 100, an area-wise breakdown and a prioritised list of actions, in a report you can print or save as PDF."),
+              ("Is my data stored or sent anywhere?", "No. The assessment runs entirely in your browser. Nothing is sent to us or stored unless you choose to contact us."),
+              ("How is the score calculated?", "Each question is worth up to 10 points: Yes (fully implemented) 10, Partially implemented 5, No 0, Not sure 0. The score is the total of all ten answers, out of 100."),
+              ("Is this score a legal opinion or an audit?", "No. It is an indicative score based only on your own answers. For a verified, in-depth analysis of your actual records, contact TeamIndia Compliance."),
+              ("What do I get in a detailed report?", "We review your registrations, filings, payroll and contractor records and give you a verified report that shows what you comply with, the gaps, and a prioritised fix plan.")]
 spath = "/compliance-score/"
-smain = f"""<h2>One report. Complete clarity.</h2>
-        <p>Most businesses know they have compliance obligations but not exactly where they stand. We give you a compliance report that removes the guesswork: it shows what you are already complying with, where you fall short, and what you need to do next.</p>
-        <h2>What the report tells you</h2>
-        <ul><li><strong>What you comply with:</strong> the registrations, filings and practices that are in order.</li><li><strong>Where the gaps are:</strong> missing registrations, late or mismatched filings, wage-structure and contractor risks, each rated by risk.</li><li><strong>What to do next:</strong> a prioritised action list with owners and deadlines, so you can fix the most serious gaps first.</li></ul>
-        <h2>What we check</h2>
-        <ul><li>EPF and ESIC registration, monthly filings and coverage, including the ₹25,000 PF wage ceiling</li><li>Payroll and salary structure against the Code on Wages</li><li>Shops &amp; Establishments, factory and contract-labour licences</li><li>Contractor compliance: licences, wage payment, PF and ESIC remittance</li><li>HR policies, appointment letters and POSH compliance</li><li>Labour Codes readiness</li></ul>
-        <h2>How it works</h2>
-        <ol><li>Message us on WhatsApp or send an enquiry.</li><li>Share a few documents and details about your locations.</li><li>We review your records and filings.</li><li>You get the report and a walkthrough of the findings and next steps.</li></ol>
-        <p>{WA_BTN("score-page-main", "btn btn-primary", label="💬 Start my free compliance health check", msg="Hi TeamIndia Compliance, I would like to check my compliance score and get a compliance report.")} {WA_BTN("score-page-sample", label="Request a sample report", msg="Hi TeamIndia Compliance, please share a sample compliance report.")}</p>
-        <h2>Who it is for</h2>
-        <p>Employers of any size: new companies setting up, growing teams crossing PF and ESIC thresholds, factories with contract labour, and businesses facing an inspection, a client audit or an investor review. See our <a href="/services/hr-compliance-audit/">HR compliance audit</a>, <a href="/services/payroll-audit/">payroll audit</a> and <a href="/services/contractor-compliance-audit/">contractor compliance audit</a> for the detailed audits.</p>
+WIDGET = """<section class="section" id="assessment" style="padding-top:24px">
+    <div class="container">
+      <div class="sa" id="sa">
+        <div id="sa-intro" class="sa-pane">
+          <span class="eyebrow">Free self-assessment</span>
+          <h2 data-focus>How compliant are you? Find out in about 3 minutes.</h2>
+          <p>Answer 10 questions and get an instant, printable report with your preliminary TeamIndia Compliance Index (TCI) score, your strong and weak areas, and what to fix first.</p>
+          <ul class="sa-points"><li>10 questions, one at a time</li><li>Score out of 100 with an area-wise breakdown</li><li>Print or save as PDF</li><li>Private: everything stays in your browser</li></ul>
+          <button type="button" id="sa-start" class="btn btn-primary">Start the assessment →</button>
+          <noscript><p style="margin-top:16px">Please enable JavaScript to take the assessment, or <a href="/#contact">contact us</a> for a compliance review.</p></noscript>
+        </div>
+        <div id="sa-q" class="sa-pane" hidden>
+          <div class="sa-top"><span id="sa-count"></span><span class="sa-area-chip" id="sa-area"></span></div>
+          <div class="sa-track" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><i id="sa-bar"></i></div>
+          <h3 id="sa-qtext" data-focus tabindex="-1"></h3>
+          <div id="sa-opts" class="sa-opts" role="radiogroup" aria-label="Choose one answer"></div>
+          <div class="sa-nav"><button type="button" id="sa-back" class="sa-link">← Back</button><span class="sa-tip">Tip: press 1–4 on your keyboard</span></div>
+        </div>
+        <div id="sa-form" class="sa-pane" hidden>
+          <span class="eyebrow">Last step</span>
+          <h3 data-focus tabindex="-1" style="font-size:26px">Who is this report for?</h3>
+          <p class="sa-sub">These details only personalise your printed report. Nothing is sent or stored.</p>
+          <form>
+            <div class="sa-grid">
+              <label>Your name *<input id="sa-name" required autocomplete="name"></label>
+              <label>Company name *<input id="sa-company" required autocomplete="organization"></label>
+              <label>City / State *<input id="sa-city" required placeholder="e.g. Gurugram, Haryana"></label>
+              <label>Industry<select id="sa-industry"></select></label>
+              <label>Approximate employee strength<select id="sa-size"></select></label>
+            </div>
+            <div class="sa-nav"><button type="button" id="sa-formback" class="sa-link">← Back</button><button type="submit" class="btn btn-primary">Generate my report →</button></div>
+          </form>
+        </div>
+        <div id="sa-report" class="sa-pane" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  """
+smain = f"""<h2>How the TCI score works</h2>
+        <p>Each of the ten questions is worth up to 10 points. Your preliminary score is the total, out of 100.</p>
+        <div class="tbl"><table><thead><tr><th>Your answer</th><th>Points</th></tr></thead><tbody><tr><td>Yes – Fully implemented</td><td>10</td></tr><tr><td>Partially implemented</td><td>5</td></tr><tr><td>No – Not implemented</td><td>0</td></tr><tr><td>Not sure</td><td>0</td></tr></tbody></table></div>
+        <div class="tbl"><table><thead><tr><th>Score</th><th>Indicative result</th></tr></thead><tbody><tr><td>90–100</td><td>Excellent</td></tr><tr><td>80–89</td><td>Good</td></tr><tr><td>70–79</td><td>Satisfactory</td></tr><tr><td>60–69</td><td>Needs Improvement</td></tr><tr><td>Below 60</td><td>Critical Attention</td></tr></tbody></table></div>
+        <h2>What the ten questions cover</h2>
+        <ul><li>Salary structure, minimum wages and statutory wage definitions</li><li>Monthly payroll verification, attendance, overtime and deductions</li><li>EPF coverage, wage calculation and contributions, including the ₹25,000 PF wage ceiling</li><li>ESIC applicability, registration and payments</li><li>Labour law registrations, licences, registers and returns</li><li>Bonus, gratuity, maternity benefits and leave</li><li>Contractor and outsourced manpower compliance</li><li>Appointment letters, employee records and HR policies</li><li>Periodic internal compliance audits</li><li>A compliance calendar and a process to track deadlines and law changes</li></ul>
+        <h2>Need a verified, in-depth report?</h2>
+        <p>The self-assessment is a quick, indicative check based on your own answers. For a detailed analysis of your actual registrations, filings, payroll and contractor records, see our <a href="/services/hr-compliance-audit/">HR compliance audit</a>, <a href="/services/payroll-audit/">payroll audit</a> and <a href="/services/contractor-compliance-audit/">contractor compliance audit</a>.</p>
+        <p>{WA_BTN("score-page-main", "btn btn-primary", label="💬 Talk to us about a detailed report", msg="Hi TeamIndia Compliance, I would like a detailed compliance report for my business.")}</p>
         <h2>Frequently asked questions</h2>
         <div class="faq-list">{faq_html(SCORE_FAQS)}</div>"""
-write("compliance-score/index.html", page("Check Your Compliance Score | Free Compliance Health Check | TeamIndia Compliance",
-      "Get a compliance report that shows what you already comply with, where the gaps are and what to do next. Start with a free compliance health check.",
+out = page("Compliance Score Check: Free TCI Self-Assessment & Report | TeamIndia Compliance",
+      "Take the free 10-question TeamIndia Compliance Index self-assessment and get an instant, printable compliance report with your score and priority actions.",
       spath, [("Home", "/"), ("Check Your Compliance Score", spath)], "Check Your Compliance Score",
-      "Get a compliance report that shows what you comply with, where the gaps are, and what to do next.", smain,
+      "Answer 10 quick questions and get an instant, printable compliance report. Everything stays in your browser.", smain,
       side([svc_link(r) for r in ("hr-compliance-audit", "payroll-audit", "contractor-compliance-audit")], "Detailed audits"),
-      [service_ld("Compliance score and compliance report", "A compliance report showing what an employer complies with, the gaps, and the next steps.", spath), faq_ld(SCORE_FAQS)]))
+      [service_ld("Compliance score and compliance report", "A free self-assessment that gives a preliminary compliance score out of 100 and a printable report.", spath), faq_ld(SCORE_FAQS)])
+k = '  <section class="section">\n    <div class="container page-grid">'
+assert k in out
+out = out.replace(k, WIDGET + k, 1).replace("</body>", '<script src="/score.js" defer></script>\n</body>', 1)
+write("compliance-score/index.html", out)
 URLS.append((spath, "0.9"))
 
 # ---------- location pages ----------
@@ -274,7 +316,7 @@ acards = "".join(f'<a class="service-card" href="{u}"><div class="service-icon">
     ("🔍", "HR Compliance Audit", "Registrations, records, policies, POSH and Labour Codes readiness, with a ranked remediation plan.", "/services/hr-compliance-audit/"),
     ("💰", "Payroll Audit", "Salary structure, PF and ESIC wage base, TDS and the new ₹25,000 PF ceiling, reconciled line by line.", "/services/payroll-audit/"),
     ("👷", "Contractor Compliance Audit", "Verify contractor licences, wage payment and PF/ESIC remittance for contract workers.", "/services/contractor-compliance-audit/"),
-    ("📊", "TeamIndia Compliance Index (TCI)", "A clear, trackable rating of your compliance position, so you can measure progress audit by audit.", "/services/hr-compliance-audit/#tci")])
+    ("📊", "TeamIndia Compliance Index (TCI)", "A score out of 100 for your compliance position. Take the free self-assessment and print your report.", "/compliance-score/")])
 audits = f"""<!-- AUDITS -->
   <section class="section" id="audits">
     <div class="container">
