@@ -570,6 +570,7 @@
               if (response.ok && json.success) {
                 form.hidden = true;
                 success.hidden = false;
+                if (window.gtag) window.gtag('event', 'generate_lead', { form: 'contact' });
                 success.scrollIntoView({ behavior: 'smooth', block: 'center' });
               } else {
                 throw new Error(json.message || 'Submission failed');
@@ -637,6 +638,7 @@
   </footer>
 
 <script src="/wa.js" defer></script>
+<script src="/analytics.js" defer></script>
 </body>
 
 </html>
