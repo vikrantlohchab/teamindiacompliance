@@ -34,26 +34,26 @@
   <!-- GTM (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MPGPVF47" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End GTM (noscript) -->
 
   <!-- NAV -->
-  <nav class="top">
+  <nav class="top nav-v2" aria-label="Main">
     <div class="nav-inner">
       <a class="logo" href="/" aria-label="TeamIndia Compliance, go to homepage">
         <div class="logo-mark">
-          <img src="/tic-logo.jpeg" alt="TeamIndia Compliance" onerror="this.style.display='none'">
+          <img src="/tic-logo.jpeg" alt="TeamIndia Compliance logo" onerror="this.style.display='none'">
         </div>
         <div class="logo-text">TeamIndia Compliance</div>
       </a>
-      <div class="nav-links">
-          <!-- <a href="/#home">Home</a> -->
-          <a href="/#about">About</a>
-          <a href="/#services">Services</a>
-          <!-- <a href="/#industries">Industries</a> -->
-          <!-- <a href="/#faq">Resources</a> -->
-          <a href="/#blog">Blog</a>
-      </div>
+      <ul class="nav-links" id="nav-menu">
+        <li><a href="/#about">About</a></li>
+        <li class="has-dd"><button type="button" class="dd-btn" aria-expanded="false" aria-haspopup="true">Services</button><div class="dd wide"><div><h5>Registrations & Licences</h5><a href="/services/epf-registration/">EPF Registration</a><a href="/services/esic-registration/">ESIC Registration</a><a href="/services/shops-establishment-registration/">Shops & Establishments</a><a href="/services/factory-license/">Factory Licence</a><a href="/services/labour-license-clra/">Labour Licence (CLRA)</a><a href="/services/multi-state-setup/">Multi-State Setup</a></div><div><h5>Payroll & Advisory</h5><a href="/services/payroll-processing/">Payroll Processing</a><a href="/services/hr-consultancy/">HR Consultancy</a><a href="/services/government-liaisoning/">Government Liaisoning</a></div><div><h5>Audits</h5><a href="/services/hr-compliance-audit/">HR Compliance Audit</a><a href="/services/payroll-audit/">Payroll Audit</a><a href="/services/contractor-compliance-audit/">Contractor Compliance Audit</a><a href="/services/statutory-audit/">Statutory Audits</a></div></div></li>
+        <li class="has-dd"><button type="button" class="dd-btn" aria-expanded="false" aria-haspopup="true">Locations</button><div class="dd"><a href="/locations/delhi-ncr/">Delhi NCR</a><a href="/locations/delhi/">Delhi</a><a href="/locations/gurugram/">Gurugram</a><a href="/locations/noida/">Noida</a><a href="/locations/faridabad/">Faridabad</a><a href="/locations/manesar/">Manesar</a><a href="/locations/haryana/">Haryana</a><a href="/locations/"><b>All locations →</b></a></div></li>
+        <li class="has-dd"><button type="button" class="dd-btn" aria-expanded="false" aria-haspopup="true">Resources</button><div class="dd"><a href="/blog/">Blog</a><a href="/compliance-score/">Check Your Compliance Score</a><a href="/resources/">Guides</a></div></li>
+        <li class="nav-mobile-only"><a href="tel:+918683852482">📞 +91 86838 52482</a></li>
+      </ul>
       <div class="nav-cta">
-        <span class="nav-phone">📞 +91 86838 52482</span>
-        <a href="/#contact" class="btn btn-primary" style="padding: 12px 20px; font-size: 14px;">Free Consultation</a>
+        <a class="nav-phone" href="tel:+918683852482">📞 +91 86838 52482</a>
+        <a href="/#contact" class="btn btn-primary" data-cta="nav-consult" style="padding: 12px 20px; font-size: 14px;">Free Consultation</a>
       </div>
+      <button type="button" class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -153,6 +153,7 @@
   </footer>
 
 <script src="/wa.js" defer></script>
+<script src="/nav.js" defer></script>
 <script src="/analytics.js" defer></script>
 </body>
 

@@ -37,7 +37,7 @@ WA_BTN = lambda src, cls="btn btn-secondary", style="", label="💬 Free health 
 
 # ---------- chrome ----------
 tpl = read("services/epf-registration/index.html")
-NAV = tpl[tpl.index('<nav class="top">'):tpl.index("</nav>") + 6]
+NAV = tpl[tpl.index('<nav class="top'):tpl.index("</nav>") + 6]
 FOOTER = tpl[tpl.index("<!-- FOOTER -->"):tpl.index("</footer>") + 9]
 AUD_LI = "".join(f'<li><a href="/services/{a["slug"]}/">{a["name"]}</a></li>' for a in AUDITS)
 if "/services/hr-compliance-audit/" not in FOOTER:
@@ -322,6 +322,8 @@ for f in glob.glob("**/*.html", recursive=True):
     if GTM_ID and "<!-- GTM -->" not in s and "<head>" in s:
         s = s.replace("<head>", "<head>\n  " + GTM_HEAD, 1)
         s = s.replace("<body>", "<body>\n  " + GTM_BODY, 1)
+    if "/nav.js" not in s and '<script src="/wa.js" defer></script>' in s:
+        s = s.replace('<script src="/wa.js" defer></script>', '<script src="/wa.js" defer></script>\n<script src="/nav.js" defer></script>', 1)
     if "/analytics.js" not in s and '<script src="/wa.js" defer></script>' in s:
         s = s.replace('<script src="/wa.js" defer></script>', '<script src="/wa.js" defer></script>\n<script src="/analytics.js" defer></script>', 1)
     write(f, s)
@@ -373,8 +375,9 @@ audits = f"""<!-- AUDITS -->
   <!-- /AUDITS -->
 
   """
-assert "<!-- LOCATIONS -->" in s
-s = s.replace("<!-- LOCATIONS -->", audits + "<!-- LOCATIONS -->", 1)
+anchor = "<!-- CODES -->" if "<!-- CODES -->" in s else "<!-- LOCATIONS -->"
+assert anchor in s
+s = s.replace(anchor, audits + anchor, 1)
 if 'data-wa="contact"' not in s:
     m = re.search(r"(Mon – Sat, 9:30 AM – 7:00 PM IST</div>\s*</div>\s*</div>\s*</div>)", s)
     assert m
@@ -419,6 +422,8 @@ write("analytics.js", """/* Google Analytics 4 (loaded directly) + click events.
   }
   function ev(name, data) { if (window.gtag) window.gtag("event", name, data || {}); }
   document.addEventListener("click", function (e) {
+    var c = e.target.closest && e.target.closest("[data-cta]");
+    if (c) ev("cta_click", { cta_id: c.getAttribute("data-cta"), page_path: location.pathname });
     var a = e.target.closest && e.target.closest("a[href]"); if (!a) return;
     var h = a.getAttribute("href") || "";
     if (h.indexOf("tel:") === 0) ev("phone_click", { link_url: h });
@@ -452,6 +457,10 @@ write("wa.js", f"""(function () {{
   f.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.23-.16-.48-.29z"/></svg><span>WhatsApp</span>';
   f.addEventListener("click", function () {{ track("float"); }});
   document.body.appendChild(f);
+  var bar = document.createElement("div"); bar.className = "mbar";
+  bar.innerHTML = '<a href="tel:{PHONE_TEL}" data-cta="mbar-call">📞 Call</a><a class="wa" href="' + url() + '" target="_blank" rel="noopener" data-cta="mbar-whatsapp">💬 WhatsApp</a><a class="pri" href="/#contact" data-cta="mbar-consult">Free Consultation</a>';
+  bar.querySelector(".wa").addEventListener("click", function () {{ track("mbar"); }});
+  document.body.appendChild(bar);
 }})();
 """)
 

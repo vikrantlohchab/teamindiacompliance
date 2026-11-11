@@ -10,6 +10,8 @@
   }
   function ev(name, data) { if (window.gtag) window.gtag("event", name, data || {}); }
   document.addEventListener("click", function (e) {
+    var c = e.target.closest && e.target.closest("[data-cta]");
+    if (c) ev("cta_click", { cta_id: c.getAttribute("data-cta"), page_path: location.pathname });
     var a = e.target.closest && e.target.closest("a[href]"); if (!a) return;
     var h = a.getAttribute("href") || "";
     if (h.indexOf("tel:") === 0) ev("phone_click", { link_url: h });

@@ -60,7 +60,7 @@ def md(src):
 
 # ---------- chrome from an existing page ----------
 tpl = read("services/epf-registration/index.html")
-NAV = tpl[tpl.index("<nav class=\"top\">"):tpl.index("</nav>") + 6]
+NAV = tpl[tpl.index("<nav class=\"top"):tpl.index("</nav>") + 6]
 FOOTER = tpl[tpl.index("<!-- FOOTER -->"):tpl.index("</footer>") + 9]
 BLOG_LINKS = '<li><a href="/blog/">Blog</a></li>'
 FOOTER = FOOTER if BLOG_LINKS in FOOTER else FOOTER.replace('<li><a href="/resources/">Guides</a></li>', BLOG_LINKS + '<li><a href="/resources/">Guides</a></li>', 1)
